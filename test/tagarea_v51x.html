@@ -1,0 +1,1981 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="Content-Language" content="ja">
+	<meta http-equiv="Content-Script-Type" content="text/javascript">
+	<meta http-equiv="Content-Style-Type" content="text/css">
+	<meta name="viewport" content="width=1024">
+	<title>Wcode - My Scrapbook Site for Web Design and Developments</title>
+	<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,700" />
+	<link rel="stylesheet" type="text/css" href="./tagarea_v51x_main.css">
+	<style type="text/css">
+/* tagarea */
+		.kwords_tagarea,
+		.tags_tagarea h4,
+		.tags_tagarea .tagbox_wrapper {
+			display: none;
+		}
+
+		.tagbox_wrapper {
+			padding: 3px;
+			border: solid 1px #000;
+			min-height: 60px;
+		}
+		.tagbox {
+		}
+		.tagbox .tag {
+			float: left;
+			margin: 1px;
+			padding: 0 8px;
+			border-radius: 20px;
+		}
+		.taginput {
+			margin: 3px;
+			padding: 4px 0 7px 10px;
+			border: 0;
+			background: transparent;
+			outline: 0;
+			color: #bcbcbc;
+			font-size: 14px;
+			line-height: 1em;
+		}
+		#kwords .taglistbox_wrapper,
+		#tagon .taglistbox_wrapper {
+			display: none;
+		}
+		#tagoff .taglistbox_wrapper {
+			margin: 5px 0;
+			width: 210px;
+			height: 800px;
+			overflow: hidden;
+		}
+		.taglistbox {
+			width: 240px;
+			height: 800px;
+			padding-right: 30px;
+			overflow-y: scroll;
+		}
+		.taglistbox .tag {
+			padding: 8px 10px 14px 20px;
+			width: 210px;
+			border-bottom: solid 1px #ddd;
+			text-align: left;
+			position: relative;
+			cursor: pointer;
+			transition-duration: .2s;
+		}
+		.taglistbox .tagListId {
+			position: absolute;
+			top: 24px;
+			right: 0;
+		}
+		.taglistbox .tagListColor {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 8px;
+			height: 100%;
+		}
+
+	/* color */
+		.tagbox_wrapper {
+			border-color: #292929;
+		}
+		.tagbox .tag {
+			background-color: #363636;
+		}
+		.taglistbox .tag {
+			border-bottom-color: #292929;
+		}
+		.taglistbox .tag:first-child {
+			border-top-color: #292929;
+		}
+		.taglistbox .tagListId {
+			color: grey;
+		}
+		.taglistbox .tagNeutral .tagListColor {
+			background-color: #277d5b;
+		}
+		.taglistbox .tagOn .tagListColor {
+			background-color: #5c98a8;
+		}
+		.taglistbox .tagOff .tagListColor {
+			background-color: #e36c67;
+		}
+	/* font */
+		.tagbox_wrapper {
+			font-size: 12px;
+			line-height: 18px;
+		}
+		.taglistbox .tagListId {
+			font-size: 10px;
+		}
+	</style>
+	<link rel="shortcut icon" href="./favicon.ico">
+	<!-- <link rel="apple-touch-icon-precomposed" href="./webclip.png" /> -->
+	<link rel="apple-touch-icon" href="../webclip.png" />
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<script type="text/javascript" src="../js/jquery.autocomplete.js"></script>
+	<script type="text/javascript" src="./tagarea_v51x_tagarea.js"></script>
+	<script type="text/javascript" src="./tagarea_v51x_main.js"></script>
+
+<!-- google analytics
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-26081171-2']);
+		_gaq.push(['_trackPageview']);
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+-->
+</head>
+<body>
+<div id="loadOverlay"></div>
+<header>
+	<div class="header-left">
+		<a href="//wcode.takehaya.jp">
+			<img src="../sitelogo.png">
+		</a>
+	</div>
+	<div class="header-right">
+		<nav>
+			<a href="https://twitter.com/intent/tweet?text%3DScrapbook%20site%20for%20web%20design%20and%20developments&url=http%3A%2F%2Fwcode.takehaya.jp&via=bleubleut0214" target="_brank">
+				<button class="iconfont button-share icon-twitter"></button>
+			</a>
+			<a href="https://plusone.google.com/_/+1/confirm?hl=ja&url=http%3A%2F%2Ftakehaya.jp%2Fwcode%2F&title=takehaya-jp" target="_brank">
+				<button class="iconfont button-share icon-gplus"></button>
+			</a>
+			<a href="http://www.facebook.com/sharer.php?u=http%3A%2F%2Ftakehaya.jp%2Fwcode%2F" target="_brank">
+				<button class="iconfont button-share icon-facebook"></button>
+			</a>
+		</nav>
+	</div>
+</header>
+<div id="container">
+	<div id="contentsContainer">
+		<div id="leftContainer">
+			<div class="iconArea clearfix">
+				<div class="searchIcon"><span class="icon-search"></span></div>
+				<div class="statusIcon"><span class="icon-list-nested"></span></div>
+				<div class="srtcutIcon"><span class="icon-flash"></span></div>
+				<div class="tagtableIcon"><span class="icon-tag"></span></div>
+				<div class="configIcon"><span class="icon-wrench"></span></div>
+				<div class="adsIcon"><span class="icon-globe"></span></div>
+			</div>
+
+			<div class="submitArea">
+				<div class="submitButton">
+					<div class="text"><span class="icon-ok"></span> RUN</div>
+					<div class="counter"><span class="cur">2345</span><span class="next"></span></div>
+				</div>
+			</div>
+
+			<div class="countArea"><span class="item_num_from">0</span> - <span class="item_num_to">0</span> of <span class="totalCount">2345</span> ...</div>
+
+			<div class="kwords_tagarea">
+				<h4>Keywords</h4>
+				<div id="kwords" class="tagareabox"></div>
+			</div>
+
+			<div class="tags_tagarea">
+				<h4>AND-Search Tags</h4>
+				<div id="tagon" class="tagareabox"></div>
+
+				<h4>NOT-Search Tags</h4>
+				<div id="tagoff" class="tagareabox"></div>
+			</div>
+<!--
+			<div class="itemStatus">
+				<div id="itemStatusKwordsBlock">
+					<div class="title">Keywords</div>
+					<div id="itemStatusKwords" class="taginputbox"></div>
+				</div>
+
+				<div id="itemStatusTagOnBlock" class="itemStatusTagCondBlock">
+					<div class="title">AND-Search Tags</div>
+					<div id="itemStatusTagOn" class="taginputbox"></div>
+				</div>
+
+				<div id="itemStatusTagOffBlock" class="itemStatusTagCondBlock">
+					<div class="title">NOT-Search Tags</div>
+					<div id="itemStatusTagOff" class="taginputbox"></div>
+				</div>
+			</div>
+
+			<div id="taglistArea">
+				<ul id="tagListBox" class="tagArea">
+										<li id="JavaScript-" class="tagItem tagNeutral" >
+						<span>JavaScript</span>
+						<div class="tagListId">JavaScript</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="JavaScript-lib" class="tagItem tagNeutral" >
+						<span>lib</span>
+						<div class="tagListId">JavaScript:lib</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="UI-accordion" class="tagItem tagNeutral" >
+						<span>accordion</span>
+						<div class="tagListId">UI:accordion</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="UI-breadcrumb" class="tagItem tagNeutral" >
+						<span>breadcrumb</span>
+						<div class="tagListId">UI:breadcrumb</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="UI-button" class="tagItem tagNeutral" >
+						<span>button</span>
+						<div class="tagListId">UI:button</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="UI-button ghost" class="tagItem tagNeutral" >
+						<span>button ghost</span>
+						<div class="tagListId">UI:button ghost</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="UI-menu" class="tagItem tagNeutral" >
+						<span>menu</span>
+						<div class="tagListId">UI:menu</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="UI-menu circle" class="tagItem tagNeutral" >
+						<span>menu circle</span>
+						<div class="tagListId">UI:menu circle</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="UI-menu dropdown" class="tagItem tagNeutral" >
+						<span>menu dropdown</span>
+						<div class="tagListId">UI:menu dropdown</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="UI-menu plus" class="tagItem tagNeutral" >
+						<span>menu plus</span>
+						<div class="tagListId">UI:menu plus</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="UI-menu side" class="tagItem tagNeutral" >
+						<span>menu side</span>
+						<div class="tagListId">UI:menu side</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="UI-tab" class="tagItem tagNeutral" >
+						<span>tab</span>
+						<div class="tagListId">UI:tab</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="UI-table" class="tagItem tagNeutral" >
+						<span>table</span>
+						<div class="tagListId">UI:table</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="UI-taginput" class="tagItem tagNeutral" >
+						<span>taginput</span>
+						<div class="tagListId">UI:taginput</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="a-bc" class="tagItem tagNeutral" >
+						<span>bc</span>
+						<div class="tagListId">a:bc</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="color-blue" class="tagItem tagNeutral" >
+						<span>blue</span>
+						<div class="tagListId">color:blue</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="color-brown" class="tagItem tagNeutral" >
+						<span>brown</span>
+						<div class="tagListId">color:brown</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="color-chart" class="tagItem tagNeutral" >
+						<span>chart</span>
+						<div class="tagListId">color:chart</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="color-generator" class="tagItem tagNeutral" >
+						<span>generator</span>
+						<div class="tagListId">color:generator</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="color-green" class="tagItem tagNeutral" >
+						<span>green</span>
+						<div class="tagListId">color:green</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="color-grey" class="tagItem tagNeutral" >
+						<span>grey</span>
+						<div class="tagListId">color:grey</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="color-orange" class="tagItem tagNeutral" >
+						<span>orange</span>
+						<div class="tagListId">color:orange</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="color-palette" class="tagItem tagNeutral" >
+						<span>palette</span>
+						<div class="tagListId">color:palette</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="color-picker" class="tagItem tagNeutral" >
+						<span>picker</span>
+						<div class="tagListId">color:picker</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="color-pink" class="tagItem tagNeutral" >
+						<span>pink</span>
+						<div class="tagListId">color:pink</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="color-purple" class="tagItem tagNeutral" >
+						<span>purple</span>
+						<div class="tagListId">color:purple</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="color-rainbow" class="tagItem tagNeutral" >
+						<span>rainbow</span>
+						<div class="tagListId">color:rainbow</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="color-red" class="tagItem tagNeutral" >
+						<span>red</span>
+						<div class="tagListId">color:red</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="color-tool" class="tagItem tagNeutral" >
+						<span>tool</span>
+						<div class="tagListId">color:tool</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="color-white" class="tagItem tagNeutral" >
+						<span>white</span>
+						<div class="tagListId">color:white</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="color-yellow" class="tagItem tagNeutral" >
+						<span>yellow</span>
+						<div class="tagListId">color:yellow</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="css-" class="tagItem tagNeutral" >
+						<span>css</span>
+						<div class="tagListId">css</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="css-css3" class="tagItem tagNeutral" >
+						<span>css3</span>
+						<div class="tagListId">css:css3</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="css-drawing" class="tagItem tagNeutral" >
+						<span>drawing</span>
+						<div class="tagListId">css:drawing</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="css-hack" class="tagItem tagNeutral" >
+						<span>hack</span>
+						<div class="tagListId">css:hack</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="css-pure" class="tagItem tagNeutral" >
+						<span>pure</span>
+						<div class="tagListId">css:pure</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="css-scss" class="tagItem tagNeutral" >
+						<span>scss</span>
+						<div class="tagListId">css:scss</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="design-404" class="tagItem tagNeutral" >
+						<span>404</span>
+						<div class="tagListId">design:404</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="design-UIs" class="tagItem tagNeutral" >
+						<span>UIs</span>
+						<div class="tagListId">design:UIs</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="design-about" class="tagItem tagNeutral" >
+						<span>about</span>
+						<div class="tagListId">design:about</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="design-bground" class="tagItem tagNeutral" >
+						<span>bground</span>
+						<div class="tagListId">design:bground</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="design-calendar" class="tagItem tagNeutral" >
+						<span>calendar</span>
+						<div class="tagListId">design:calendar</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="design-comments" class="tagItem tagNeutral" >
+						<span>comments</span>
+						<div class="tagListId">design:comments</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="design-counter" class="tagItem tagNeutral" >
+						<span>counter</span>
+						<div class="tagListId">design:counter</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="design-datepicker" class="tagItem tagNeutral" >
+						<span>datepicker</span>
+						<div class="tagListId">design:datepicker</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="design-favicon" class="tagItem tagNeutral" >
+						<span>favicon</span>
+						<div class="tagListId">design:favicon</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="design-footer" class="tagItem tagNeutral" >
+						<span>footer</span>
+						<div class="tagListId">design:footer</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="design-gage" class="tagItem tagNeutral" >
+						<span>gage</span>
+						<div class="tagListId">design:gage</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="design-graph" class="tagItem tagNeutral" >
+						<span>graph</span>
+						<div class="tagListId">design:graph</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="design-guide" class="tagItem tagNeutral" >
+						<span>guide</span>
+						<div class="tagListId">design:guide</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="design-handwriting" class="tagItem tagNeutral" >
+						<span>handwriting</span>
+						<div class="tagListId">design:handwriting</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="design-header" class="tagItem tagNeutral" >
+						<span>header</span>
+						<div class="tagListId">design:header</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="design-icon" class="tagItem tagNeutral" >
+						<span>icon</span>
+						<div class="tagListId">design:icon</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="design-icon animate" class="tagItem tagNeutral" >
+						<span>icon animate</span>
+						<div class="tagListId">design:icon animate</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="design-iconfont" class="tagItem tagNeutral" >
+						<span>iconfont</span>
+						<div class="tagListId">design:iconfont</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="design-illustration" class="tagItem tagNeutral" >
+						<span>illustration</span>
+						<div class="tagListId">design:illustration</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="design-jogdial" class="tagItem tagNeutral" >
+						<span>jogdial</span>
+						<div class="tagListId">design:jogdial</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="design-link" class="tagItem tagNeutral" >
+						<span>link</span>
+						<div class="tagListId">design:link</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="design-loading" class="tagItem tagNeutral" >
+						<span>loading</span>
+						<div class="tagListId">design:loading</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="design-logo" class="tagItem tagNeutral" >
+						<span>logo</span>
+						<div class="tagListId">design:logo</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="design-map" class="tagItem tagNeutral" >
+						<span>map</span>
+						<div class="tagListId">design:map</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="design-modalwin" class="tagItem tagNeutral" >
+						<span>modalwin</span>
+						<div class="tagListId">design:modalwin</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="design-music" class="tagItem tagNeutral" >
+						<span>music</span>
+						<div class="tagListId">design:music</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="design-notification" class="tagItem tagNeutral" >
+						<span>notification</span>
+						<div class="tagListId">design:notification</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="design-onboarding" class="tagItem tagNeutral" >
+						<span>onboarding</span>
+						<div class="tagListId">design:onboarding</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="design-pagemap" class="tagItem tagNeutral" >
+						<span>pagemap</span>
+						<div class="tagListId">design:pagemap</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="design-pagenavi" class="tagItem tagNeutral" >
+						<span>pagenavi</span>
+						<div class="tagListId">design:pagenavi</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="design-pattern" class="tagItem tagNeutral" >
+						<span>pattern</span>
+						<div class="tagListId">design:pattern</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="design-photogallery" class="tagItem tagNeutral" >
+						<span>photogallery</span>
+						<div class="tagListId">design:photogallery</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="design-player" class="tagItem tagNeutral" >
+						<span>player</span>
+						<div class="tagListId">design:player</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="design-pointer" class="tagItem tagNeutral" >
+						<span>pointer</span>
+						<div class="tagListId">design:pointer</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="design-pricing" class="tagItem tagNeutral" >
+						<span>pricing</span>
+						<div class="tagListId">design:pricing</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="design-progressbar" class="tagItem tagNeutral" >
+						<span>progressbar</span>
+						<div class="tagListId">design:progressbar</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="design-ribbon" class="tagItem tagNeutral" >
+						<span>ribbon</span>
+						<div class="tagListId">design:ribbon</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="design-scrollbar" class="tagItem tagNeutral" >
+						<span>scrollbar</span>
+						<div class="tagListId">design:scrollbar</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="design-searchbox" class="tagItem tagNeutral" >
+						<span>searchbox</span>
+						<div class="tagListId">design:searchbox</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="design-slider" class="tagItem tagNeutral" >
+						<span>slider</span>
+						<div class="tagListId">design:slider</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="design-slider plus" class="tagItem tagNeutral" >
+						<span>slider plus</span>
+						<div class="tagListId">design:slider plus</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="design-social button" class="tagItem tagNeutral" >
+						<span>social button</span>
+						<div class="tagListId">design:social button</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="design-sound" class="tagItem tagNeutral" >
+						<span>sound</span>
+						<div class="tagListId">design:sound</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="design-spinner" class="tagItem tagNeutral" >
+						<span>spinner</span>
+						<div class="tagListId">design:spinner</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="design-tag" class="tagItem tagNeutral" >
+						<span>tag</span>
+						<div class="tagListId">design:tag</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="design-text" class="tagItem tagNeutral" >
+						<span>text</span>
+						<div class="tagListId">design:text</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="design-texture" class="tagItem tagNeutral" >
+						<span>texture</span>
+						<div class="tagListId">design:texture</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="design-ticker" class="tagItem tagNeutral" >
+						<span>ticker</span>
+						<div class="tagListId">design:ticker</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="design-timeline" class="tagItem tagNeutral" >
+						<span>timeline</span>
+						<div class="tagListId">design:timeline</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="design-tooltip" class="tagItem tagNeutral" >
+						<span>tooltip</span>
+						<div class="tagListId">design:tooltip</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="design-transition" class="tagItem tagNeutral" >
+						<span>transition</span>
+						<div class="tagListId">design:transition</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="design-tree" class="tagItem tagNeutral" >
+						<span>tree</span>
+						<div class="tagListId">design:tree</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="design-typography" class="tagItem tagNeutral" >
+						<span>typography</span>
+						<div class="tagListId">design:typography</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="design-visualblog" class="tagItem tagNeutral" >
+						<span>visualblog</span>
+						<div class="tagListId">design:visualblog</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="design-wizard" class="tagItem tagNeutral" >
+						<span>wizard</span>
+						<div class="tagListId">design:wizard</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="effect-" class="tagItem tagNeutral" >
+						<span>effect</span>
+						<div class="tagListId">effect</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="effect-click" class="tagItem tagNeutral" >
+						<span>click</span>
+						<div class="tagListId">effect:click</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="effect-flip" class="tagItem tagNeutral" >
+						<span>flip</span>
+						<div class="tagListId">effect:flip</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="effect-folding" class="tagItem tagNeutral" >
+						<span>folding</span>
+						<div class="tagListId">effect:folding</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="effect-glitch" class="tagItem tagNeutral" >
+						<span>glitch</span>
+						<div class="tagListId">effect:glitch</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="effect-hover" class="tagItem tagNeutral" >
+						<span>hover</span>
+						<div class="tagListId">effect:hover</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="effect-mouse" class="tagItem tagNeutral" >
+						<span>mouse</span>
+						<div class="tagListId">effect:mouse</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="effect-ripple" class="tagItem tagNeutral" >
+						<span>ripple</span>
+						<div class="tagListId">effect:ripple</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="effect-rotating" class="tagItem tagNeutral" >
+						<span>rotating</span>
+						<div class="tagListId">effect:rotating</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="effect-shake" class="tagItem tagNeutral" >
+						<span>shake</span>
+						<div class="tagListId">effect:shake</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="effect-zoom" class="tagItem tagNeutral" >
+						<span>zoom</span>
+						<div class="tagListId">effect:zoom</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="feature-" class="tagItem tagNeutral" >
+						<span>feature</span>
+						<div class="tagListId">feature</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="feature-2015" class="tagItem tagNeutral" >
+						<span>2015</span>
+						<div class="tagListId">feature:2015</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="feature-wcode201404" class="tagItem tagNeutral" >
+						<span>wcode201404</span>
+						<div class="tagListId">feature:wcode201404</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="font-" class="tagItem tagNeutral" >
+						<span>font</span>
+						<div class="tagListId">font</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="font-stylesheet" class="tagItem tagNeutral" >
+						<span>stylesheet</span>
+						<div class="tagListId">font:stylesheet</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="font-webfont" class="tagItem tagNeutral" >
+						<span>webfont</span>
+						<div class="tagListId">font:webfont</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="form-" class="tagItem tagNeutral" >
+						<span>form</span>
+						<div class="tagListId">form</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="form-check" class="tagItem tagNeutral" >
+						<span>check</span>
+						<div class="tagListId">form:check</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="form-file" class="tagItem tagNeutral" >
+						<span>file</span>
+						<div class="tagListId">form:file</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="form-input" class="tagItem tagNeutral" >
+						<span>input</span>
+						<div class="tagListId">form:input</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="form-radio" class="tagItem tagNeutral" >
+						<span>radio</span>
+						<div class="tagListId">form:radio</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="form-range" class="tagItem tagNeutral" >
+						<span>range</span>
+						<div class="tagListId">form:range</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="form-select" class="tagItem tagNeutral" >
+						<span>select</span>
+						<div class="tagListId">form:select</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="form-textarea" class="tagItem tagNeutral" >
+						<span>textarea</span>
+						<div class="tagListId">form:textarea</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="gif-anime" class="tagItem tagNeutral" >
+						<span>anime</span>
+						<div class="tagListId">gif:anime</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="grid-" class="tagItem tagNeutral" >
+						<span>grid</span>
+						<div class="tagListId">grid</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="grid-3d" class="tagItem tagNeutral" >
+						<span>3d</span>
+						<div class="tagListId">grid:3d</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="grid-asymmetry" class="tagItem tagNeutral" >
+						<span>asymmetry</span>
+						<div class="tagListId">grid:asymmetry</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="grid-gridplus" class="tagItem tagNeutral" >
+						<span>gridplus</span>
+						<div class="tagListId">grid:gridplus</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="grid-masonry" class="tagItem tagNeutral" >
+						<span>masonry</span>
+						<div class="tagListId">grid:masonry</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="grid-nogutter" class="tagItem tagNeutral" >
+						<span>nogutter</span>
+						<div class="tagListId">grid:nogutter</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="html-" class="tagItem tagNeutral" >
+						<span>html</span>
+						<div class="tagListId">html</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="html-html5" class="tagItem tagNeutral" >
+						<span>html5</span>
+						<div class="tagListId">html:html5</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="info-inactive" class="tagItem tagNeutral" >
+						<span>inactive</span>
+						<div class="tagListId">info:inactive</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="info-renewed" class="tagItem tagNeutral" >
+						<span>renewed</span>
+						<div class="tagListId">info:renewed</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="jQuery-" class="tagItem tagNeutral" >
+						<span>jQuery</span>
+						<div class="tagListId">jQuery</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="jQuery-plugin" class="tagItem tagNeutral" >
+						<span>plugin</span>
+						<div class="tagListId">jQuery:plugin</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="junre-Japonism" class="tagItem tagNeutral" >
+						<span>Japonism</span>
+						<div class="tagListId">junre:Japonism</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="junre-UIguideline" class="tagItem tagNeutral" >
+						<span>UIguideline</span>
+						<div class="tagListId">junre:UIguideline</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="junre-actress" class="tagItem tagNeutral" >
+						<span>actress</span>
+						<div class="tagListId">junre:actress</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="junre-anime" class="tagItem tagNeutral" >
+						<span>anime</span>
+						<div class="tagListId">junre:anime</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="junre-app" class="tagItem tagNeutral" >
+						<span>app</span>
+						<div class="tagListId">junre:app</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="junre-architecture" class="tagItem tagNeutral" >
+						<span>architecture</span>
+						<div class="tagListId">junre:architecture</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="junre-artist" class="tagItem tagNeutral" >
+						<span>artist</span>
+						<div class="tagListId">junre:artist</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="junre-award" class="tagItem tagNeutral" >
+						<span>award</span>
+						<div class="tagListId">junre:award</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="junre-blog" class="tagItem tagNeutral" >
+						<span>blog</span>
+						<div class="tagListId">junre:blog</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="junre-bookstore" class="tagItem tagNeutral" >
+						<span>bookstore</span>
+						<div class="tagListId">junre:bookstore</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="junre-brand" class="tagItem tagNeutral" >
+						<span>brand</span>
+						<div class="tagListId">junre:brand</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="junre-campaign" class="tagItem tagNeutral" >
+						<span>campaign</span>
+						<div class="tagListId">junre:campaign</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="junre-cheat" class="tagItem tagNeutral" >
+						<span>cheat</span>
+						<div class="tagListId">junre:cheat</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="junre-code" class="tagItem tagNeutral" >
+						<span>code</span>
+						<div class="tagListId">junre:code</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="junre-company" class="tagItem tagNeutral" >
+						<span>company</span>
+						<div class="tagListId">junre:company</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="junre-confectionary" class="tagItem tagNeutral" >
+						<span>confectionary</span>
+						<div class="tagListId">junre:confectionary</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="junre-eshop" class="tagItem tagNeutral" >
+						<span>eshop</span>
+						<div class="tagListId">junre:eshop</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="junre-fashion" class="tagItem tagNeutral" >
+						<span>fashion</span>
+						<div class="tagListId">junre:fashion</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="junre-food and drink" class="tagItem tagNeutral" >
+						<span>food and drink</span>
+						<div class="tagListId">junre:food and drink</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="junre-funding" class="tagItem tagNeutral" >
+						<span>funding</span>
+						<div class="tagListId">junre:funding</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="junre-furniture" class="tagItem tagNeutral" >
+						<span>furniture</span>
+						<div class="tagListId">junre:furniture</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="junre-game" class="tagItem tagNeutral" >
+						<span>game</span>
+						<div class="tagListId">junre:game</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="junre-guideline" class="tagItem tagNeutral" >
+						<span>guideline</span>
+						<div class="tagListId">junre:guideline</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="junre-hospital" class="tagItem tagNeutral" >
+						<span>hospital</span>
+						<div class="tagListId">junre:hospital</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="junre-hotel" class="tagItem tagNeutral" >
+						<span>hotel</span>
+						<div class="tagListId">junre:hotel</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="junre-humor" class="tagItem tagNeutral" >
+						<span>humor</span>
+						<div class="tagListId">junre:humor</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="junre-journal" class="tagItem tagNeutral" >
+						<span>journal</span>
+						<div class="tagListId">junre:journal</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="junre-lab" class="tagItem tagNeutral" >
+						<span>lab</span>
+						<div class="tagListId">junre:lab</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="junre-landing" class="tagItem tagNeutral" >
+						<span>landing</span>
+						<div class="tagListId">junre:landing</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="junre-magazine" class="tagItem tagNeutral" >
+						<span>magazine</span>
+						<div class="tagListId">junre:magazine</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="junre-mediaart" class="tagItem tagNeutral" >
+						<span>mediaart</span>
+						<div class="tagListId">junre:mediaart</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="junre-movie" class="tagItem tagNeutral" >
+						<span>movie</span>
+						<div class="tagListId">junre:movie</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="junre-museum" class="tagItem tagNeutral" >
+						<span>museum</span>
+						<div class="tagListId">junre:museum</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="junre-musician" class="tagItem tagNeutral" >
+						<span>musician</span>
+						<div class="tagListId">junre:musician</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="junre-no-junre" class="tagItem tagNeutral" >
+						<span>no-junre</span>
+						<div class="tagListId">junre:no-junre</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="junre-official" class="tagItem tagNeutral" >
+						<span>official</span>
+						<div class="tagListId">junre:official</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="junre-photographer" class="tagItem tagNeutral" >
+						<span>photographer</span>
+						<div class="tagListId">junre:photographer</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="junre-porn" class="tagItem tagNeutral" >
+						<span>porn</span>
+						<div class="tagListId">junre:porn</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="junre-portfolio" class="tagItem tagNeutral" >
+						<span>portfolio</span>
+						<div class="tagListId">junre:portfolio</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="junre-reference" class="tagItem tagNeutral" >
+						<span>reference</span>
+						<div class="tagListId">junre:reference</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="junre-restaurant" class="tagItem tagNeutral" >
+						<span>restaurant</span>
+						<div class="tagListId">junre:restaurant</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="junre-shop" class="tagItem tagNeutral" >
+						<span>shop</span>
+						<div class="tagListId">junre:shop</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="junre-stationary" class="tagItem tagNeutral" >
+						<span>stationary</span>
+						<div class="tagListId">junre:stationary</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="junre-studio" class="tagItem tagNeutral" >
+						<span>studio</span>
+						<div class="tagListId">junre:studio</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="junre-styleguide" class="tagItem tagNeutral" >
+						<span>styleguide</span>
+						<div class="tagListId">junre:styleguide</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="junre-travel" class="tagItem tagNeutral" >
+						<span>travel</span>
+						<div class="tagListId">junre:travel</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="junre-webart" class="tagItem tagNeutral" >
+						<span>webart</span>
+						<div class="tagListId">junre:webart</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="junre-webcatalog" class="tagItem tagNeutral" >
+						<span>webcatalog</span>
+						<div class="tagListId">junre:webcatalog</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="junre-webservice" class="tagItem tagNeutral" >
+						<span>webservice</span>
+						<div class="tagListId">junre:webservice</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="junre-webtool" class="tagItem tagNeutral" >
+						<span>webtool</span>
+						<div class="tagListId">junre:webtool</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="junre-wedding" class="tagItem tagNeutral" >
+						<span>wedding</span>
+						<div class="tagListId">junre:wedding</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="key-beauty" class="tagItem tagNeutral" >
+						<span>beauty</span>
+						<div class="tagListId">key:beauty</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="key-bike" class="tagItem tagNeutral" >
+						<span>bike</span>
+						<div class="tagListId">key:bike</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="key-cat" class="tagItem tagNeutral" >
+						<span>cat</span>
+						<div class="tagListId">key:cat</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="key-clock" class="tagItem tagNeutral" >
+						<span>clock</span>
+						<div class="tagListId">key:clock</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="key-gear" class="tagItem tagNeutral" >
+						<span>gear</span>
+						<div class="tagListId">key:gear</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="key-joke" class="tagItem tagNeutral" >
+						<span>joke</span>
+						<div class="tagListId">key:joke</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="key-keyboard" class="tagItem tagNeutral" >
+						<span>keyboard</span>
+						<div class="tagListId">key:keyboard</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="key-periodictable" class="tagItem tagNeutral" >
+						<span>periodictable</span>
+						<div class="tagListId">key:periodictable</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="key-wallpaper" class="tagItem tagNeutral" >
+						<span>wallpaper</span>
+						<div class="tagListId">key:wallpaper</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="key-wordpress" class="tagItem tagNeutral" >
+						<span>wordpress</span>
+						<div class="tagListId">key:wordpress</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="lang-Chinese" class="tagItem tagNeutral" >
+						<span>Chinese</span>
+						<div class="tagListId">lang:Chinese</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="lang-Czech" class="tagItem tagNeutral" >
+						<span>Czech</span>
+						<div class="tagListId">lang:Czech</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="lang-Dutch" class="tagItem tagNeutral" >
+						<span>Dutch</span>
+						<div class="tagListId">lang:Dutch</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="lang-English" class="tagItem tagNeutral" >
+						<span>English</span>
+						<div class="tagListId">lang:English</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="lang-French" class="tagItem tagNeutral" >
+						<span>French</span>
+						<div class="tagListId">lang:French</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="lang-German" class="tagItem tagNeutral" >
+						<span>German</span>
+						<div class="tagListId">lang:German</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="lang-Italian" class="tagItem tagNeutral" >
+						<span>Italian</span>
+						<div class="tagListId">lang:Italian</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="lang-Japanese" class="tagItem tagNeutral" >
+						<span>Japanese</span>
+						<div class="tagListId">lang:Japanese</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="lang-Korean" class="tagItem tagNeutral" >
+						<span>Korean</span>
+						<div class="tagListId">lang:Korean</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="lang-Polish" class="tagItem tagNeutral" >
+						<span>Polish</span>
+						<div class="tagListId">lang:Polish</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="lang-Portuguese" class="tagItem tagNeutral" >
+						<span>Portuguese</span>
+						<div class="tagListId">lang:Portuguese</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="lang-Romanian" class="tagItem tagNeutral" >
+						<span>Romanian</span>
+						<div class="tagListId">lang:Romanian</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="lang-Russian" class="tagItem tagNeutral" >
+						<span>Russian</span>
+						<div class="tagListId">lang:Russian</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="lang-Spanish" class="tagItem tagNeutral" >
+						<span>Spanish</span>
+						<div class="tagListId">lang:Spanish</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="lang-Swedish" class="tagItem tagNeutral" >
+						<span>Swedish</span>
+						<div class="tagListId">lang:Swedish</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="lang-unknown" class="tagItem tagNeutral" >
+						<span>unknown</span>
+						<div class="tagListId">lang:unknown</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="layer-" class="tagItem tagNeutral" >
+						<span>layer</span>
+						<div class="tagListId">layer</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="layer-concept" class="tagItem tagNeutral" >
+						<span>concept</span>
+						<div class="tagListId">layer:concept</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="layer-webUI" class="tagItem tagNeutral" >
+						<span>webUI</span>
+						<div class="tagListId">layer:webUI</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="layer-webdesign" class="tagItem tagNeutral" >
+						<span>webdesign</span>
+						<div class="tagListId">layer:webdesign</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="layer-webmanual" class="tagItem tagNeutral" >
+						<span>webmanual</span>
+						<div class="tagListId">layer:webmanual</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="layer-webtech" class="tagItem tagNeutral" >
+						<span>webtech</span>
+						<div class="tagListId">layer:webtech</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="layout-" class="tagItem tagNeutral" >
+						<span>layout</span>
+						<div class="tagListId">layout</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="layout-horizontal" class="tagItem tagNeutral" >
+						<span>horizontal</span>
+						<div class="tagListId">layout:horizontal</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="layout-noscroll" class="tagItem tagNeutral" >
+						<span>noscroll</span>
+						<div class="tagListId">layout:noscroll</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="layout-onepage" class="tagItem tagNeutral" >
+						<span>onepage</span>
+						<div class="tagListId">layout:onepage</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="layout-plus" class="tagItem tagNeutral" >
+						<span>plus</span>
+						<div class="tagListId">layout:plus</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="layout-singlepage" class="tagItem tagNeutral" >
+						<span>singlepage</span>
+						<div class="tagListId">layout:singlepage</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="layout-split" class="tagItem tagNeutral" >
+						<span>split</span>
+						<div class="tagListId">layout:split</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="lib-D3.js" class="tagItem tagNeutral" >
+						<span>D3.js</span>
+						<div class="tagListId">lib:D3.js</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="photo-" class="tagItem tagNeutral" >
+						<span>photo</span>
+						<div class="tagListId">photo</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="photo-background" class="tagItem tagNeutral" >
+						<span>background</span>
+						<div class="tagListId">photo:background</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="photo-blured" class="tagItem tagNeutral" >
+						<span>blured</span>
+						<div class="tagListId">photo:blured</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="photo-circular" class="tagItem tagNeutral" >
+						<span>circular</span>
+						<div class="tagListId">photo:circular</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="photo-filter" class="tagItem tagNeutral" >
+						<span>filter</span>
+						<div class="tagListId">photo:filter</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="photo-marker" class="tagItem tagNeutral" >
+						<span>marker</span>
+						<div class="tagListId">photo:marker</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="photo-overlay" class="tagItem tagNeutral" >
+						<span>overlay</span>
+						<div class="tagListId">photo:overlay</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="photo-panorama" class="tagItem tagNeutral" >
+						<span>panorama</span>
+						<div class="tagListId">photo:panorama</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="photo-position" class="tagItem tagNeutral" >
+						<span>position</span>
+						<div class="tagListId">photo:position</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="photo-slideshow" class="tagItem tagNeutral" >
+						<span>slideshow</span>
+						<div class="tagListId">photo:slideshow</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="photo-stack" class="tagItem tagNeutral" >
+						<span>stack</span>
+						<div class="tagListId">photo:stack</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="photo-transparency" class="tagItem tagNeutral" >
+						<span>transparency</span>
+						<div class="tagListId">photo:transparency</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="php-" class="tagItem tagNeutral" >
+						<span>php</span>
+						<div class="tagListId">php</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="scroll-" class="tagItem tagNeutral" >
+						<span>scroll</span>
+						<div class="tagListId">scroll</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="scroll-gridscroll" class="tagItem tagNeutral" >
+						<span>gridscroll</span>
+						<div class="tagListId">scroll:gridscroll</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="scroll-infinity" class="tagItem tagNeutral" >
+						<span>infinity</span>
+						<div class="tagListId">scroll:infinity</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="scroll-ios-like" class="tagItem tagNeutral" >
+						<span>ios-like</span>
+						<div class="tagListId">scroll:ios-like</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="scroll-loop" class="tagItem tagNeutral" >
+						<span>loop</span>
+						<div class="tagListId">scroll:loop</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="scroll-parallax" class="tagItem tagNeutral" >
+						<span>parallax</span>
+						<div class="tagListId">scroll:parallax</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="scroll-scroll3D" class="tagItem tagNeutral" >
+						<span>scroll3D</span>
+						<div class="tagListId">scroll:scroll3D</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="scroll-scrollplus" class="tagItem tagNeutral" >
+						<span>scrollplus</span>
+						<div class="tagListId">scroll:scrollplus</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="service-dribbble" class="tagItem tagNeutral" >
+						<span>dribbble</span>
+						<div class="tagListId">service:dribbble</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="service-facebook" class="tagItem tagNeutral" >
+						<span>facebook</span>
+						<div class="tagListId">service:facebook</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="service-flickr" class="tagItem tagNeutral" >
+						<span>flickr</span>
+						<div class="tagListId">service:flickr</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="service-instagram" class="tagItem tagNeutral" >
+						<span>instagram</span>
+						<div class="tagListId">service:instagram</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="service-twitter" class="tagItem tagNeutral" >
+						<span>twitter</span>
+						<div class="tagListId">service:twitter</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="service-vimeo" class="tagItem tagNeutral" >
+						<span>vimeo</span>
+						<div class="tagListId">service:vimeo</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="shape-" class="tagItem tagNeutral" >
+						<span>shape</span>
+						<div class="tagListId">shape</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="shape-circle" class="tagItem tagNeutral" >
+						<span>circle</span>
+						<div class="tagListId">shape:circle</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="shape-hexagon" class="tagItem tagNeutral" >
+						<span>hexagon</span>
+						<div class="tagListId">shape:hexagon</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="shape-particles" class="tagItem tagNeutral" >
+						<span>particles</span>
+						<div class="tagListId">shape:particles</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="shape-pentagon" class="tagItem tagNeutral" >
+						<span>pentagon</span>
+						<div class="tagListId">shape:pentagon</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="style-bicolor" class="tagItem tagNeutral" >
+						<span>bicolor</span>
+						<div class="tagListId">style:bicolor</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="style-black and white" class="tagItem tagNeutral" >
+						<span>black and white</span>
+						<div class="tagListId">style:black and white</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="style-block" class="tagItem tagNeutral" >
+						<span>block</span>
+						<div class="tagListId">style:block</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="style-card" class="tagItem tagNeutral" >
+						<span>card</span>
+						<div class="tagListId">style:card</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="style-chat" class="tagItem tagNeutral" >
+						<span>chat</span>
+						<div class="tagListId">style:chat</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="style-clean" class="tagItem tagNeutral" >
+						<span>clean</span>
+						<div class="tagListId">style:clean</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="style-coloring" class="tagItem tagNeutral" >
+						<span>coloring</span>
+						<div class="tagListId">style:coloring</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="style-flat" class="tagItem tagNeutral" >
+						<span>flat</span>
+						<div class="tagListId">style:flat</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="style-hud" class="tagItem tagNeutral" >
+						<span>hud</span>
+						<div class="tagListId">style:hud</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="style-infographic" class="tagItem tagNeutral" >
+						<span>infographic</span>
+						<div class="tagListId">style:infographic</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="style-line" class="tagItem tagNeutral" >
+						<span>line</span>
+						<div class="tagListId">style:line</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="style-material" class="tagItem tagNeutral" >
+						<span>material</span>
+						<div class="tagListId">style:material</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="style-metro" class="tagItem tagNeutral" >
+						<span>metro</span>
+						<div class="tagListId">style:metro</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="style-minimal" class="tagItem tagNeutral" >
+						<span>minimal</span>
+						<div class="tagListId">style:minimal</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="style-monocolor" class="tagItem tagNeutral" >
+						<span>monocolor</span>
+						<div class="tagListId">style:monocolor</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="style-monotone" class="tagItem tagNeutral" >
+						<span>monotone</span>
+						<div class="tagListId">style:monotone</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="style-picturebook" class="tagItem tagNeutral" >
+						<span>picturebook</span>
+						<div class="tagListId">style:picturebook</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="style-polygon" class="tagItem tagNeutral" >
+						<span>polygon</span>
+						<div class="tagListId">style:polygon</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="style-simple" class="tagItem tagNeutral" >
+						<span>simple</span>
+						<div class="tagListId">style:simple</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="style-storytelling" class="tagItem tagNeutral" >
+						<span>storytelling</span>
+						<div class="tagListId">style:storytelling</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="style-streetview" class="tagItem tagNeutral" >
+						<span>streetview</span>
+						<div class="tagListId">style:streetview</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="style-swiss" class="tagItem tagNeutral" >
+						<span>swiss</span>
+						<div class="tagListId">style:swiss</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="style-tonedark" class="tagItem tagNeutral" >
+						<span>tonedark</span>
+						<div class="tagListId">style:tonedark</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="style-tonesoft" class="tagItem tagNeutral" >
+						<span>tonesoft</span>
+						<div class="tagListId">style:tonesoft</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="tech-3D" class="tagItem tagNeutral" >
+						<span>3D</span>
+						<div class="tagListId">tech:3D</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="tech-RSS" class="tagItem tagNeutral" >
+						<span>RSS</span>
+						<div class="tagListId">tech:RSS</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="tech-WebGL" class="tagItem tagNeutral" >
+						<span>WebGL</span>
+						<div class="tagListId">tech:WebGL</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="tech-algorithm" class="tagItem tagNeutral" >
+						<span>algorithm</span>
+						<div class="tagListId">tech:algorithm</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="tech-animation" class="tagItem tagNeutral" >
+						<span>animation</span>
+						<div class="tagListId">tech:animation</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="tech-autocomplete" class="tagItem tagNeutral" >
+						<span>autocomplete</span>
+						<div class="tagListId">tech:autocomplete</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="tech-bookmarklet" class="tagItem tagNeutral" >
+						<span>bookmarklet</span>
+						<div class="tagListId">tech:bookmarklet</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="tech-bootstrap" class="tagItem tagNeutral" >
+						<span>bootstrap</span>
+						<div class="tagListId">tech:bootstrap</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="tech-canvas" class="tagItem tagNeutral" >
+						<span>canvas</span>
+						<div class="tagListId">tech:canvas</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="tech-cart" class="tagItem tagNeutral" >
+						<span>cart</span>
+						<div class="tagListId">tech:cart</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="tech-dev_tool" class="tagItem tagNeutral" >
+						<span>dev_tool</span>
+						<div class="tagListId">tech:dev_tool</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="tech-dragdrop" class="tagItem tagNeutral" >
+						<span>dragdrop</span>
+						<div class="tagListId">tech:dragdrop</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="tech-editable" class="tagItem tagNeutral" >
+						<span>editable</span>
+						<div class="tagListId">tech:editable</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="tech-framework" class="tagItem tagNeutral" >
+						<span>framework</span>
+						<div class="tagListId">tech:framework</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="tech-highlight" class="tagItem tagNeutral" >
+						<span>highlight</span>
+						<div class="tagListId">tech:highlight</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="tech-interaction" class="tagItem tagNeutral" >
+						<span>interaction</span>
+						<div class="tagListId">tech:interaction</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="tech-internet" class="tagItem tagNeutral" >
+						<span>internet</span>
+						<div class="tagListId">tech:internet</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="tech-json" class="tagItem tagNeutral" >
+						<span>json</span>
+						<div class="tagListId">tech:json</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="tech-lazyload" class="tagItem tagNeutral" >
+						<span>lazyload</span>
+						<div class="tagListId">tech:lazyload</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="tech-mindmap" class="tagItem tagNeutral" >
+						<span>mindmap</span>
+						<div class="tagListId">tech:mindmap</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="tech-morphing" class="tagItem tagNeutral" >
+						<span>morphing</span>
+						<div class="tagListId">tech:morphing</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="tech-motion" class="tagItem tagNeutral" >
+						<span>motion</span>
+						<div class="tagListId">tech:motion</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="tech-mysql" class="tagItem tagNeutral" >
+						<span>mysql</span>
+						<div class="tagListId">tech:mysql</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="tech-ocr" class="tagItem tagNeutral" >
+						<span>ocr</span>
+						<div class="tagListId">tech:ocr</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="tech-oss" class="tagItem tagNeutral" >
+						<span>oss</span>
+						<div class="tagListId">tech:oss</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="tech-resize" class="tagItem tagNeutral" >
+						<span>resize</span>
+						<div class="tagListId">tech:resize</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="tech-responsive" class="tagItem tagNeutral" >
+						<span>responsive</span>
+						<div class="tagListId">tech:responsive</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="tech-rss" class="tagItem tagNeutral" >
+						<span>rss</span>
+						<div class="tagListId">tech:rss</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="tech-security" class="tagItem tagNeutral" >
+						<span>security</span>
+						<div class="tagListId">tech:security</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="tech-sortable" class="tagItem tagNeutral" >
+						<span>sortable</span>
+						<div class="tagListId">tech:sortable</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="tech-svg" class="tagItem tagNeutral" >
+						<span>svg</span>
+						<div class="tagListId">tech:svg</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="tech-touchUI" class="tagItem tagNeutral" >
+						<span>touchUI</span>
+						<div class="tagListId">tech:touchUI</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="tech-translation" class="tagItem tagNeutral" >
+						<span>translation</span>
+						<div class="tagListId">tech:translation</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="tech-uploader" class="tagItem tagNeutral" >
+						<span>uploader</span>
+						<div class="tagListId">tech:uploader</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="tech-vim" class="tagItem tagNeutral" >
+						<span>vim</span>
+						<div class="tagListId">tech:vim</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="tech-visualization" class="tagItem tagNeutral" >
+						<span>visualization</span>
+						<div class="tagListId">tech:visualization</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="tech-web" class="tagItem tagNeutral" >
+						<span>web</span>
+						<div class="tagListId">tech:web</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="tech-webGL" class="tagItem tagNeutral" >
+						<span>webGL</span>
+						<div class="tagListId">tech:webGL</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="tech-wedget" class="tagItem tagNeutral" >
+						<span>wedget</span>
+						<div class="tagListId">tech:wedget</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="tech-wysiwyg" class="tagItem tagNeutral" >
+						<span>wysiwyg</span>
+						<div class="tagListId">tech:wysiwyg</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="type-Article" class="tagItem tagNeutral" >
+						<span>Article</span>
+						<div class="tagListId">type:Article</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="type-Gallery" class="tagItem tagNeutral" >
+						<span>Gallery</span>
+						<div class="tagListId">type:Gallery</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="type-Github" class="tagItem tagNeutral" >
+						<span>Github</span>
+						<div class="tagListId">type:Github</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="type-Page" class="tagItem tagNeutral" >
+						<span>Page</span>
+						<div class="tagListId">type:Page</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="type-Pinterest" class="tagItem tagNeutral" >
+						<span>Pinterest</span>
+						<div class="tagListId">type:Pinterest</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="type-Resource" class="tagItem tagNeutral" >
+						<span>Resource</span>
+						<div class="tagListId">type:Resource</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="type-Site" class="tagItem tagNeutral" >
+						<span>Site</span>
+						<div class="tagListId">type:Site</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="type-tumblr" class="tagItem tagNeutral" >
+						<span>tumblr</span>
+						<div class="tagListId">type:tumblr</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="video-" class="tagItem tagNeutral" >
+						<span>video</span>
+						<div class="tagListId">video</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="video-bg" class="tagItem tagNeutral" >
+						<span>bg</span>
+						<div class="tagListId">video:bg</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="video-mark" class="tagItem tagNeutral" >
+						<span>mark</span>
+						<div class="tagListId">video:mark</div>
+						<div class="tagListColor"></div>
+					</li>
+										<li id="video-panorama360" class="tagItem tagNeutral" >
+						<span>panorama360</span>
+						<div class="tagListId">video:panorama360</div>
+						<div class="tagListColor"></div>
+					</li>
+					
+				</ul>
+			</div>
+-->
+		</div>
+		<div id="rightContainer">
+		</div>
+	</div>
+</div>
+<footer>
+	<div class="footer_site">
+		<div class="columns">
+			<div class="column">
+				<h3>About this site</h3>
+				<div class="content">
+	"Wcode" is my scrapbook site about web design and developments, in which key feature is Tag Search...
+				</div>
+			</div>
+			<div class="column">
+				<h3>Browser Support</h3>
+				<div class="content">
+					<p>
+This page is developed mainly on Google Chrome.If this page does not display correctly, please try to use these browsers.
+					</p>
+					<div class="browser">
+						<ul>
+							<li>MBP/MBA</li><li><i class="icon-ok"></i>Chrome</li><li><i class="icon-cancel"></i>FireFox</li><li><i class="icon-cancel"></i>Safari</li>
+						</ul>
+					</div>
+					<div class="browser">
+						<ul>
+							<li>Win10</li><li><i class="icon-ok"></i>Chrome</li><li><i class="icon-cancel"></i>FireFox</li><li><i class="icon-cancel"></i>Edge</li>
+						</ul>
+					</div>
+					<div class="browser">
+						<ul>
+							<li>iPad</li><li><i class="icon-ok"></i>Chrome</li><li><i class="icon-cancel"></i>FireFox</li><li><i class="icon-cancel"></i>Safari</li>
+						</ul>
+					</div>
+					<div class="browser">
+						<ul>
+							<li>Nexus7</li><li><i class="icon-ok"></i>Chrome</li><li><i class="icon-cancel"></i>FireFox</li><li></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="footer_me">
+		<h3>About me</h3>
+		<p>My Name is Takeru Iso, a front-end developer in Japan.<br />I'm still studying JavaScript / jQuery / HTML5 / CSS3 / PHP / Laravel / MySQL / Photoshop / Vim.</p>
+		<div class="columns columns_aboutme">
+			<div class="column column_sns">
+				<ul>
+					<li class="sns tw_en">
+						<a href="https://twitter.com/bleubleut0214" target="_brank">
+							<span>Twitter</span>
+							<span class="sns-icon icon-twitter"></span>
+						</a>
+					</li>
+					<li class="sns gplus">
+						<a href="https://plus.google.com/109423045902383948591/about" target="_brank">
+							<span>Google+</span>
+							<span class="sns-icon icon-gplus"></span>
+						</a>
+					</li>
+					<li class="sns fb">
+						<a href="http://www.facebook.com/isotake0214" target="_brank">
+							<span>Facebook</span>
+							<span class="sns-icon icon-facebook"></span>
+						</a>
+					</li>
+					<li class="sns github">
+						<a href="https://github.com/Isotake" target="_brank">
+							<span>GitHub</span>
+							<span class="sns-icon icon-github"></span>
+						</a>
+					</li>
+					<li class="sns codepen">
+						<a href="http://codepen.io/Isotake/" target="_brank">
+							<span>CodePen</span>
+							<span class="sns-icon icon-codepen"></span>
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="column column_sns">
+				<div class="marks">
+					<div class="mark mark_1"></div>
+					<div class="mark mark_3"></div>
+					<div class="mark mark_4"></div>
+				</div>
+			</div>
+			<div class="column column_sns">
+				<ul>
+					<li class="sns tw_jp">
+						<a href="https://twitter.com/isotake0214" target="_brank">
+							<span>ツイッター</span>
+							<span class="sns-icon icon-twitter"></span>
+						</a>
+					</li>
+					<li class="sns blog">
+						<a href="http://bleu-bleut.hatenablog.jp/" target="_brank">
+							<span>はてなブログ</span>
+							<span class="sns-icon icon-hateblog"></span>
+						</a>
+					</li>
+					<li class="sns blog">
+						<a href="http://b.hatena.ne.jp/bleu-bleut/bookmark" target="_brank">
+							<span>はてなブックマーク</span>
+							<span class="sns-icon icon-hatebu"></span>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="footer_copyright">
+		Copyright &copy; 2013 takehaya All Rights Reserved.
+	</div>
+</footer>
+</body>
+
+</html>
+<!-- <img src="./images/loading/gif-load.gif"/> -->
+<!-- v5.00 -->

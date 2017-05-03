@@ -1,0 +1,195 @@
+html, body, div{
+	margin:0;
+	padding:0;
+}
+html{
+	width: 100%;
+}
+body{
+	width: 100%;
+	font: 16px/24px Meiryo,'Hiragino Kaku Gothic Pro','MS PGothic',Arial,Verdana,Sans-Serif;
+	background-image: url(./ptn0907/1-4-1.png);
+}
+a {
+	text-decoration: none;
+}
+div {
+	-webkit-box-sizing: border-box;
+}
+
+#container {
+	margin: 100px auto;
+	width: 1000px;
+}
+.board {
+	width: 100%;
+	margin: 20px 0px;
+	padding: 0px 40px 40px 40px;
+	background: #fff;
+	border: solid 2px #000;
+}
+.header {
+	padding-top: 40px;
+	font-size: 48px;
+	font-weight: bold;
+}
+.digest {
+	display: -webkit-box;
+	-webkit-box-pack: center;
+}
+.digest_area {
+	width: 33%;
+}
+.features li,
+.digest_area li {
+	list-style-type: none;
+	position: relative;
+	line-height: 32px;
+}
+.contents {
+	display: -webkit-box;
+	-webkit-box-align: center;
+	-webkit-box-pack: center;
+}
+.block{
+	margin: 20px;
+	width: 418px;
+	height: 480px;
+	background-color: #fff;
+}
+.tagareabox {
+	width: 100%;
+	overflow: hidden;
+}
+.tagbox_wrapper {
+	width: 416px;
+	height: 220px;
+	padding-right: 20px;
+	overflow-y: scroll;
+	border: solid 3px #000;
+}
+.tagbox {
+	width: 390px;
+	height: 214px;
+}
+.taginput {
+	margin: 20px 0px;
+	padding: 0px 0px 0px 10px;
+	width: 400px;
+	height: 40px;
+	border: solid 3px #000;
+	background: #fff;
+	outline: 0px;
+	font-size: 16px;
+	font-weight: bold;
+}
+.taglistbox_wrapper {
+	width: 416px;
+	height: 220px;
+	padding-right: 20px;
+	border: solid 3px #000;
+	overflow-y: scroll;
+}
+.taglistbox {
+	width: 390px;
+	height: 214px;
+}
+.tag {
+	display: block;
+	float: left;
+	margin: 3px;
+	border-radius: 20px;
+}
+.tagbox .tag {
+	padding: 6px 10px;
+	font-size: 18px;
+	font-weight: bold;
+	color: #fff;
+	background-color: #000;
+}
+.cancel_tag {
+	color: #fff;
+}
+.taglistbox .tag {
+	padding: 4px 8px;
+	font-size: 16px;
+	font-weight: bold;
+	color: #000;
+	background-color: #fff;
+	cursor: pointer;
+}
+.taglistbox .tag.selected {
+	color: #000;
+	background-color: #fff;
+	text-decoration: line-through;
+}
+.taglistbox .tag.pointed {
+	color: #fff;
+	background-color: #000;
+}
+
+.tagbox_wrapper::-webkit-scrollbar,
+.taglistbox_wrapper::-webkit-scrollbar {
+	width: 20px;
+}
+.tagbox_wrapper::-webkit-scrollbar-track,
+.taglistbox_wrapper::-webkit-scrollbar-track {
+	background-color: #fff;
+}
+.tagbox_wrapper::-webkit-scrollbar-thumb,
+.taglistbox_wrapper::-webkit-scrollbar-thumb {
+	border: solid 3px #fff;
+	background-color: #000;
+}
+
+
+.documents {
+}
+
+.footer {
+	padding: 20px 40px;
+	text-align: right;
+}
+
+/* fontello */
+@font-face {
+	font-family: 'fontello';
+	src: url('./font/fontello_0627.eot');
+	src: url('./font/fontello_0627.eot?#iefix') format('embeded-opentype'),
+		 url('./font/fontello_0627.woff') format('woff'),
+		 url('./font/fontello_0627.ttf') format('truetype'),
+		 url('./font/fontello_0627.svg#fontello') format('svg');
+}
+.features li:before,
+.digest_area li:before {
+	font-family: 'fontello';
+	font-style: normal;
+	font-weight: normal;
+	speak: none;
+	display: inline-block;
+	content: 'b';
+	font-size: 24px;
+	line-height: 24px;
+	position: absolute;
+	top: 4px;
+	left: -32px;
+}
+
+/* social button */
+.fb_iframe_widget {
+	margin-left: -30px;
+	line-height: 10px;
+} 
+.hatena-bookmark-button-frame {
+	margin-left: -32px;
+}
+
+/* general */
+.clearfix:after {
+	content: '.';
+	display: block;
+	clear: both;
+	height: 0;
+	visibility: hidden;
+}
+

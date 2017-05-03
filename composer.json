@@ -1,0 +1,12 @@
+{
+    "require": {
+        "cartalyst/sentinel": "^2.0",
+        "cartalyst/support": "~1.0",
+        "illuminate/database": "~5.0",
+        "illuminate/events": "^5.2",
+        "illuminate/http": "~5.0",
+        "illuminate/support": "~5.0",
+        "php": ">=5.4.0",
+        "paragonie/random_compat": "~1.1"
+    }
+}

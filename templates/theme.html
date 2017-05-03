@@ -1,0 +1,261 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="Content-Language" content="ja">
+	<meta http-equiv="Content-Script-Type" content="text/javascript">
+	<meta http-equiv="Content-Style-Type" content="text/css">
+	<meta name="viewport" content="width=1024">
+	<title><?php $tpl->const(_MD_WCODE_SITE_TITLE); ?></title>
+	<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,700" />
+	<link rel="stylesheet" type="text/css" href="./css/main.css">
+	<link rel="shortcut icon" href="./favicon.ico">
+	<!-- <link rel="apple-touch-icon-precomposed" href="./webclip.png" /> -->
+	<link rel="apple-touch-icon" href="./webclip.png" />
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<script type="text/javascript" src="./js/tagarea.js"></script>
+	<script type="text/javascript" src="./js/main.js"></script>
+
+<!-- google analytics
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-26081171-2']);
+		_gaq.push(['_trackPageview']);
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+-->
+</head>
+<body>
+<div id="loadOverlay"></div>
+<header>
+	<div class="header-left">
+		<a href="//wcode.takehaya.jp">
+			<img src="sitelogo.png">
+		</a>
+	</div>
+	<div class="header-right">
+		<nav>
+			<a href="https://twitter.com/intent/tweet?text%3DScrapbook%20site%20for%20web%20design%20and%20developments&url=http%3A%2F%2Fwcode.takehaya.jp&via=bleubleut0214" target="_brank">
+				<button class="iconfont button-share icon-twitter"></button>
+			</a>
+			<a href="https://plusone.google.com/_/+1/confirm?hl=ja&url=http%3A%2F%2Ftakehaya.jp%2Fwcode%2F&title=takehaya-jp" target="_brank">
+				<button class="iconfont button-share icon-gplus"></button>
+			</a>
+			<a href="http://www.facebook.com/sharer.php?u=http%3A%2F%2Ftakehaya.jp%2Fwcode%2F" target="_brank">
+				<button class="iconfont button-share icon-facebook"></button>
+			</a>
+		</nav>
+	</div>
+</header>
+<div id="container">
+	<div id="contentsContainer">
+		<div id="leftContainer">
+			<div class="iconArea clearfix">
+				<div class="searchIcon"><span class="icon-search"></span></div>
+				<div class="statusIcon"><span class="icon-list-nested"></span></div>
+				<div class="srtcutIcon"><span class="icon-flash"></span></div>
+				<div class="tagtableIcon"><span class="icon-tag"></span></div>
+				<div class="configIcon"><span class="icon-wrench"></span></div>
+				<div class="adsIcon"><span class="icon-globe"></span></div>
+			</div>
+
+			<div class="submitArea">
+				<div class="submitButton">
+					<div class="text"><span class="<?php if($tpl->count > 0){ echo 'icon-ok'; } else { echo 'icon-cancel'; } ?>"></span> RUN</div>
+					<div class="counter"><span class="cur"><?php echo $tpl->count; ?></span><span class="next"></span></div>
+				</div>
+			</div>
+
+			<div class="countArea"><?php $tpl->const(_MD_WCODE_COUNTAREA11); ?><span class="item_num_from"><?php echo $tpl->item_num_from; ?></span> - <span class="item_num_to"><?php echo $tpl->item_num_to; ?></span><?php $tpl->const(_MD_WCODE_COUNTAREA12); ?><span class="totalCount"><?php echo $tpl->count; ?></span><?php $tpl->const(_MD_WCODE_COUNTAREA13); ?></div>
+
+			<div class="kwords_tagarea">
+				<h4>Keywords</h4>
+				<div id="kwords" class="tagareabox"></div>
+			</div>
+
+			<div class="tags_tagarea">
+				<div id="tagon" class="tagareabox">
+					<div class="pre-tag"><?php if(isset($tpl->pretag_tagon) && !!($tpl->pretag_tagon)){ echo $tpl->pretag_tagon; } ?></div>
+				</div>
+
+				<div id="tagoff" class="tagareabox">
+					<div class="pre-tag"><?php if(isset($tpl->pretag_tagoff)){ echo $tpl->pretag_tagoff; } ?></div>
+					<div class="pre-list"><?php if(isset($tpl->prelist_tagoff)){ echo $tpl->prelist_tagoff; } ?></div>
+				</div>
+			</div>
+
+		</div>
+		<div id="rightContainer">
+			<div class="itemPrevArea <?php if($tpl->item_num_from == 0){ echo 'hidden'; } ?>">
+				<div id="upCircleIcon" class="circleIcon upCircle"><div class="icon-down-circle"></div></div>
+			</div>
+			<div id="recordList" class="itemArea">
+
+				<div class="items itemSrtcut itemSrtcutInit">
+					<div class="itemSrtcutTitle"><?php $tpl->const(_MD_WCODE_ITEMSRTCUT_CLEARTITLE); ?></div>
+					<div class="itemSrtcutDesc"><?php $tpl->const(_MD_WCODE_ITEMSRTCUT_CLEARDESC); ?></div>
+					<div class="itemSrtcutExec"><?php $tpl->const(_MD_WCODE_ITEMSRTCUT_CLEARRUN); ?></div>
+				</div>
+
+				<div class="items itemSrtcut itemSrtcutReload">
+					<div class="itemSrtcutTitle"><?php $tpl->const(_MD_WCODE_ITEMSRTCUT_RESETTITLE); ?></div>
+					<div class="itemSrtcutDesc"><?php $tpl->const(_MD_WCODE_ITEMSRTCUT_RESETDESC); ?></div>
+					<div class="itemSrtcutExec"><?php $tpl->const(_MD_WCODE_ITEMSRTCUT_RESETRUN); ?></div>
+				</div>
+
+				<div class="items itemConfig itemConfigMaxrows">
+					<div id="itemConfigTitle"><?php $tpl->const(_MD_WCODE_ITEMCONFIG_TITLE); ?></div>
+					<div id="itemConfigDesc"><span class="small"><?php $tpl->const(_MD_WCODE_ITEMCONFIG_DESC); ?></span></div>
+					<div class="itemConfigExec">10</div>
+					<div class="itemConfigExec">30</div>
+					<div class="itemConfigExec">50</div>
+				</div>
+
+				<div class="items itemGlobe itemGlobeDonate">
+					<div class="itemGlobeTitle"><?php $tpl->const(_MD_WCODE_ITEMGLOBE_DONATETITLE); ?></div>
+					<div class="itemGlobeDesc"><?php $tpl->const(_MD_WCODE_ITEMGLOBE_DONATEDESC); ?></div>
+					<div class="itemGlobeExec"><a href="http://gum.co/ZYWM"><?php $tpl->const(_MD_WCODE_ITEMGLOBE_DONATERUN); ?></a></div>
+				</div>
+
+				<?php foreach($tpl->records as $record){ ?>
+				<div class="items itemCard">
+					<div class="imageBlock" data-itemrid="<?php echo $record['rid']; ?>" data-itemtitle="<?php echo $record['title']; ?>" data-itemdesc="<?php echo $record['desc']; ?>" data-itemurl="<?php echo $record['url']; ?>" data-thumburl="<?php echo $record['thumb_url']; ?>" data-itemtag="<?php echo $record['taglist']; ?>">
+						<img class="itemImage" src="<?php echo $record['thumb_url']; ?>" />
+						<img class="loading" src="./css/images/gif-load.gif" />
+					</div>
+					<div class="taglistBlock">
+						<?php foreach($record['tags'] as $tag){?>
+						<div class="tagItemBlock"><?php echo $tag; ?></div>
+						<?php } ?>
+					</div>
+				</div>
+				<?php } ?>
+			</div>
+			<div class="itemCountArea"><?php $tpl->const(_MD_WCODE_COUNTAREA21); ?><span class="item_num_from"><?php echo $tpl->item_num_from; ?></span> - <span class="item_num_to"><?php echo $tpl->item_num_to; ?></span><?php $tpl->const(_MD_WCODE_COUNTAREA22); ?><span class="totalCount"><?php echo $tpl->count; ?></span><?php $tpl->const(_MD_WCODE_COUNTAREA23); ?></div>
+			<div class="itemNextArea <?php if($tpl->count == $tpl->item_num_to){ echo 'hidden'; } ?>">
+				<div id="downCircleIcon" class="circleIcon downIcon" data-maxrows="<?php echo $tpl->maxrow; ?>"><div class="icon-down-circle"></div></div>
+			</div>
+			<div class="debugArea">
+				<?php echo $tpl->debug_output; ?>
+			</div>
+		</div>
+	</div>
+</div>
+<footer>
+	<div class="footer_site">
+		<div class="columns">
+			<div class="column">
+				<h3>About this site</h3>
+				<div class="content">
+	"Wcode" is my scrapbook site about web design and developments, in which key feature is Tag Search...
+				</div>
+			</div>
+			<div class="column">
+				<h3>Browser Support</h3>
+				<div class="content">
+					<p>
+This page is developed mainly on Google Chrome.If this page does not display correctly, please try to use these browsers.
+					</p>
+					<div class="browser">
+						<ul>
+							<li>MBP/MBA</li><li><i class="icon-ok"></i>Chrome</li><li><i class="icon-cancel"></i>FireFox</li><li><i class="icon-cancel"></i>Safari</li>
+						</ul>
+					</div>
+					<div class="browser">
+						<ul>
+							<li>Win10</li><li><i class="icon-ok"></i>Chrome</li><li><i class="icon-cancel"></i>FireFox</li><li><i class="icon-cancel"></i>Edge</li>
+						</ul>
+					</div>
+					<div class="browser">
+						<ul>
+							<li>iPad</li><li><i class="icon-ok"></i>Chrome</li><li><i class="icon-cancel"></i>FireFox</li><li><i class="icon-cancel"></i>Safari</li>
+						</ul>
+					</div>
+					<div class="browser">
+						<ul>
+							<li>Nexus7</li><li><i class="icon-ok"></i>Chrome</li><li><i class="icon-cancel"></i>FireFox</li><li></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="footer_me">
+		<h3>About me</h3>
+		<p>My Name is Takeru Iso, a front-end developer in Japan.<br />I'm still studying JavaScript / jQuery / HTML5 / CSS3 / PHP / Laravel / MySQL / Photoshop / Vim.</p>
+		<div class="columns columns_aboutme">
+			<div class="column column_sns">
+				<ul>
+					<li class="sns tw_en">
+						<a href="https://twitter.com/bleubleut0214" target="_brank">
+							<span>Twitter</span>
+							<span class="sns-icon icon-twitter"></span>
+						</a>
+					</li>
+					<li class="sns gplus">
+						<a href="https://plus.google.com/109423045902383948591/about" target="_brank">
+							<span>Google+</span>
+							<span class="sns-icon icon-gplus"></span>
+						</a>
+					</li>
+					<li class="sns fb">
+						<a href="http://www.facebook.com/isotake0214" target="_brank">
+							<span>Facebook</span>
+							<span class="sns-icon icon-facebook"></span>
+						</a>
+					</li>
+					<li class="sns github">
+						<a href="https://github.com/Isotake" target="_brank">
+							<span>GitHub</span>
+							<span class="sns-icon icon-github"></span>
+						</a>
+					</li>
+					<li class="sns codepen">
+						<a href="http://codepen.io/Isotake/" target="_brank">
+							<span>CodePen</span>
+							<span class="sns-icon icon-codepen"></span>
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="column column_sns">
+				<div class="marks">
+					<div class="mark mark_1"></div>
+					<div class="mark mark_3"></div>
+					<div class="mark mark_4"></div>
+				</div>
+			</div>
+			<div class="column column_sns">
+				<ul>
+					<li class="sns tw_jp">
+						<a href="https://twitter.com/isotake0214" target="_brank">
+							<span>ツイッター</span>
+							<span class="sns-icon icon-twitter"></span>
+						</a>
+					</li>
+					<li class="sns blog">
+						<a href="http://bleu-bleut.hatenablog.jp/" target="_brank">
+							<span>はてなブログ</span>
+							<span class="sns-icon icon-hateblog"></span>
+						</a>
+					</li>
+					<li class="sns blog">
+						<a href="http://bleu-bleut.hatenablog.jp/" target="_brank">
+							<span>はてなブックマーク</span>
+							<span class="sns-icon icon-hatebu"></span>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="footer_copyright">
+		Copyright &copy; 2013-2017 takehaya All Rights Reserved.
+	</div>
+</footer>
+</body>
+</html>

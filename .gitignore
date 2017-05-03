@@ -1,0 +1,7 @@
+/images/*
+!/images/.gitkeep
+/sql/*
+!/sql/.gitkeep
+/vendor/*
+!/vendor/.gitkeep
+mainfile.php

@@ -1,0 +1,270 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="Content-Language" content="ja">
+	<meta http-equiv="Content-Script-Type" content="text/javascript">
+	<meta http-equiv="Content-Style-Type" content="text/css">
+	<title>test02_parameters.php</title>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<script type="text/javascript" src="../js/ajaxFunc.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('a').on('click', function(e){
+				var _id = $(this).attr('id');
+				var data_config = $(this).data('config');
+				var arr_config = data_config.split(',');
+
+				var _config = {
+//					url: './test02_parameters.php',
+					url: '../search.php',
+					mode: (arr_config[0]) ? arr_config[0] : 'search' ,
+					kwords: (arr_config[1]) ? arr_config[1] : ' ',
+					tagOnArray: (arr_config[2]) ? arr_config[2].split(' ') : [] ,
+					tagOffArray: (arr_config[3]) ? arr_config[3].split(' ') : [] ,
+					offset: (arr_config[4] || arr_config[4]===0) ? parseInt(arr_config[4]) : 0 ,
+					maxrow: (arr_config[5]) ? parseInt(arr_config[5]) : 10 ,
+					item_num: (arr_config[6]) ? parseInt(arr_config[6]) : 0 ,
+					cb_success: function(data, status, xhr){
+						console.log(data);
+					}
+				};
+				console.log(_config);
+				$.wcode.getRecords(_config);
+			});
+		});
+	</script>
+</head>
+<body>
+	<h3>mode:onload / search</h3>
+	<a id="test02_1" href="" onClick="return false;" data-config="search,,,,0,10,0">#test02_1</a><br />
+	mode: 'search'<br />
+	kwords: ' '<br />
+	tagOnArray: []<br />
+	tagOffArray: []<br />
+	offset: 0<br />
+	maxrow: 10<br />
+	item_num: 0<br />
+	<br />
+	<a id="test02_2" href="" onClick="return false;" data-config="search,,,,50,30,10">#test02_2</a><br />
+	mode: 'search'<br />
+	kwords: ' '<br />
+	tagOnArray: []<br />
+	tagOffArray: []<br />
+	offset: 50<br />
+	maxrow: 30<br />
+	item_num: 10<br />
+	<br />
+	<a id="test02_3" href="" onClick="return false;" data-config="search,,JavaScript:lib,,0,10,10">#test02_3</a><br />
+	mode: 'search'<br />
+	kwords: ' '<br />
+	tagOnArray: ["JavaScript:lib"]<br />
+	tagOffArray: []<br />
+	offset: 0<br />
+	maxrow: 10<br />
+	item_num: 10<br />
+	<br />
+	<a id="test02_4" href="" onClick="return false;" data-config="search,,,JavaScript:lib,0,10,10">#test02_4</a><br />
+	mode: 'search'<br />
+	kwords: ' '<br />
+	tagOnArray: []<br />
+	tagOffArray: ["JavaScript:lib"]<br />
+	offset: 0<br />
+	maxrow: 10<br />
+	item_num: 10<br />
+	<br />
+	<a id="test02_5" href="" onClick="return false;" data-config="search,a b,,,0,10,10">#test02_5</a><br />
+	mode: 'search'<br />
+	kwords: 'a b'<br />
+	tagOnArray: []<br />
+	tagOffArray: []<br />
+	offset: 0<br />
+	maxrow: 10<br />
+	item_num: 10<br />
+	<br />
+	<h3>mode:prevto</h3>
+	<a href="" onClick="return false;" data-config="prevto,,,,10,30,60">#test02_41</a><br />
+	mode: 'prevto'<br />
+	kwords: ' '<br />
+	tagOnArray: []<br />
+	tagOffArray: []<br />
+	offset: 10<br />
+	maxrow: 30<br />
+	item_num: 60<br />
+	<br />
+	<a id="test02_12" href="" onClick="return false;" data-config="nextto,,,,0,10,10">#test02_12</a><br />
+	mode: 'nextto'<br />
+	kwords: ' '<br />
+	tagOnArray: []<br />
+	tagOffArray: []<br />
+	offset: 0<br />
+	maxrow: 10<br />
+	item_num: 10<br />
+	<br />
+	<a id="test02_13" href="" onClick="return false;" data-config="nextto,,JavaScript:lib,,10,10,10">#test02_13</a><br />
+	mode: 'nextto'<br />
+	kwords: ' '<br />
+	tagOnArray: ["JavaScript:lib"]<br />
+	tagOffArray: []<br />
+	offset: 10<br />
+	maxrow: 10<br />
+	item_num: 10<br />
+	<br />
+	<a id="test02_14" href="" onClick="return false;" data-config="nextto,,,JavaScript:lib,10,10,10">#test02_14</a><br />
+	mode: 'nextto'<br />
+	kwords: ' '<br />
+	tagOnArray: []<br />
+	tagOffArray: ["JavaScript:lib"]<br />
+	offset: 10<br />
+	maxrow: 10<br />
+	item_num: 10<br />
+	<br />
+	<a id="test02_15" href="" onClick="return false;" data-config="nextto,a b,,,10,10,10">#test02_15</a><br />
+	mode: 'nextto'<br />
+	kwords: 'a b'<br />
+	tagOnArray: []<br />
+	tagOffArray: []<br />
+	offset: 10<br />
+	maxrow: 10<br />
+	item_num: 10<br />
+	<br />
+	<h3>mode:nextto</h3>
+	<a id="test02_11" href="" onClick="return false;" data-config="nextto,,,,10,10,10">#test02_11</a><br />
+	mode: 'nextto'<br />
+	kwords: ' '<br />
+	tagOnArray: []<br />
+	tagOffArray: []<br />
+	offset: 10<br />
+	maxrow: 10<br />
+	item_num: 10<br />
+	<br />
+	<a id="test02_12" href="" onClick="return false;" data-config="nextto,,,,0,10,10">#test02_12</a><br />
+	mode: 'nextto'<br />
+	kwords: ' '<br />
+	tagOnArray: []<br />
+	tagOffArray: []<br />
+	offset: 0<br />
+	maxrow: 10<br />
+	item_num: 10<br />
+	<br />
+	<a id="test02_13" href="" onClick="return false;" data-config="nextto,,JavaScript:lib,,10,10,10">#test02_13</a><br />
+	mode: 'nextto'<br />
+	kwords: ' '<br />
+	tagOnArray: ["JavaScript:lib"]<br />
+	tagOffArray: []<br />
+	offset: 10<br />
+	maxrow: 10<br />
+	item_num: 10<br />
+	<br />
+	<a id="test02_14" href="" onClick="return false;" data-config="nextto,,,JavaScript:lib,10,10,10">#test02_14</a><br />
+	mode: 'nextto'<br />
+	kwords: ' '<br />
+	tagOnArray: []<br />
+	tagOffArray: ["JavaScript:lib"]<br />
+	offset: 10<br />
+	maxrow: 10<br />
+	item_num: 10<br />
+	<br />
+	<a id="test02_15" href="" onClick="return false;" data-config="nextto,a b,,,10,10,10">#test02_15</a><br />
+	mode: 'nextto'<br />
+	kwords: 'a b'<br />
+	tagOnArray: []<br />
+	tagOffArray: []<br />
+	offset: 10<br />
+	maxrow: 10<br />
+	item_num: 10<br />
+	<br />
+	<h3>mode:count</h3>
+	<a id="test02_21" href="" onClick="return false;" data-config="count,,,,0,10,10">#test02_21</a><br />
+	mode: 'count'<br />
+	kwords: ' '<br />
+	tagOnArray: []<br />
+	tagOffArray: []<br />
+	offset: 0<br />
+	maxrow: 10<br />
+	item_num: 10<br />
+	<br />
+	<a id="test02_22" href="" onClick="return false;" data-config="count,,,,50,30,10">#test02_22</a><br />
+	mode: 'count'<br />
+	kwords: ' '<br />
+	tagOnArray: []<br />
+	tagOffArray: []<br />
+	offset: 50<br />
+	maxrow: 30<br />
+	item_num: 10<br />
+	<br />
+	<a id="test02_23" href="" onClick="return false;" data-config="count,,JavaScript:lib,,0,10,10">#test02_23</a><br />
+	mode: 'count'<br />
+	kwords: ' '<br />
+	tagOnArray: ["JavaScript:lib"]<br />
+	tagOffArray: []<br />
+	offset: 0<br />
+	maxrow: 10<br />
+	item_num: 10<br />
+	<br />
+	<a id="test02_24" href="" onClick="return false;" data-config="count,,,JavaScript:lib,0,10,10">#test02_24</a><br />
+	mode: 'count'<br />
+	kwords: ' '<br />
+	tagOnArray: []<br />
+	tagOffArray: ["JavaScript:lib"]<br />
+	offset: 0<br />
+	maxrow: 10<br />
+	item_num: 10<br />
+	<br />
+	<a id="test02_25" href="" onClick="return false;" data-config="count,a b,,,0,10,10">#test02_25</a><br />
+	mode: 'count'<br />
+	kwords: 'a b'<br />
+	tagOnArray: []<br />
+	tagOffArray: []<br />
+	offset: 0<br />
+	maxrow: 10<br />
+	item_num: 10<br />
+	<br />
+	<h3>mode:taglist</h3>
+	<a id="test02_31" href="" onClick="return false;" data-config="taglist,,,,0,10,10">#test02_31</a><br />
+	mode: 'taglist'<br />
+	kwords: ' '<br />
+	tagOnArray: []<br />
+	tagOffArray: []<br />
+	offset: 0<br />
+	maxrow: 10<br />
+	item_num: 10<br />
+	<br />
+	<a id="test02_32" href="" onClick="return false;" data-config="taglist,,,,50,30,10">#test02_32</a><br />
+	mode: 'taglist'<br />
+	kwords: ' '<br />
+	tagOnArray: []<br />
+	tagOffArray: []<br />
+	offset: 50<br />
+	maxrow: 30<br />
+	item_num: 10<br />
+	<br />
+	<a id="test02_33" href="" onClick="return false;" data-config="taglist,,JavaScript:lib,,0,10,10">#test02_33</a><br />
+	mode: 'taglist'<br />
+	kwords: ' '<br />
+	tagOnArray: ["JavaScript:lib"]<br />
+	tagOffArray: []<br />
+	offset: 0<br />
+	maxrow: 10<br />
+	item_num: 10<br />
+	<br />
+	<a id="test02_34" href="" onClick="return false;" data-config="taglist,,,JavaScript:lib,0,10,10">#test02_34</a><br />
+	mode: 'taglist'<br />
+	kwords: ' '<br />
+	tagOnArray: []<br />
+	tagOffArray: ["JavaScript:lib"]<br />
+	offset: 0<br />
+	maxrow: 10<br />
+	item_num: 10<br />
+	<br />
+	<a id="test02_35" href="" onClick="return false;" data-config="taglist,a b,,,0,10,10">#test02_35</a><br />
+	mode: 'taglist'<br />
+	kwords: 'a b'<br />
+	tagOnArray: []<br />
+	tagOffArray: []<br />
+	offset: 0<br />
+	maxrow: 10<br />
+	item_num: 10<br />
+	<br />
+</body>
+</html>

@@ -1,0 +1,139 @@
+body, div {
+	margin:0;
+	padding:0;
+}
+body,input, pre {
+	font: 16px/24px Meiryo,'メイリオ','Hiragino Kaku Gothic Pro','ヒラギノ角ゴ Pro W3','MS PGothic','ＭＳ Ｐゴシック',Arial,Verdana,Sans-Serif;
+	color: #000;
+}
+div {
+	-webkit-box-sizing: border-box;
+}
+html {
+	width: 100%;
+	height:100%;
+}
+body {
+	width: 100%;
+	height:100%;
+}
+#container {
+	width: 100%;
+	height:100%;
+	display: -webkit-box;
+	-webkit-box-sizing: border-box;
+	-webkit-box-align: center;
+	-webkit-box-pack: center;
+}
+#mainContainer {
+	margin: 50px auto;
+	width: 800px;
+	height:600px;
+	display: -webkit-box;
+	-webkit-box-align: start;
+	-webkit-box-pack: center;
+}
+#leftContainer, #rightContainer {
+	padding: 15px;
+}
+
+.inputArea {
+	margin: 10px auto;
+	width: 600px;
+}
+.inputForm {
+	width: 100%;
+	height: 60px;
+	border: solid 5px #ccc;
+	display: -webkit-box;
+	-webkit-box-align: center;
+	-webkit-box-pack: center;
+	-webkit-box-sizing: border-box;
+}
+.inputForm .textinput{
+	width: 535px;
+}
+.inputForm input{
+	width: 523px;
+	height: 38px;
+	margin: 0;
+	padding: 6px;
+	border: 0;
+	font: medium/1.2 Meiryo,"MS PGothic",Arial,Verdana,Sans-Serif;
+}
+.inputForm .submit_read {
+	width:55px;
+	height:50px;
+	cursor:pointer;
+	font-size: 24px;
+	color: white;
+	background: #ccc;
+	display: -webkit-box;
+	-webkit-box-align: center;
+	-webkit-box-pack: center;
+}
+
+.titleArea, .urlArea, .descArea, .taglistArea {
+	margin: 10px auto;
+}
+.titleForm, .urlForm {
+	width: 100%;
+	height: 60px;
+	border: solid 5px #ccc;
+}
+.titleForm .titleInput, .urlForm .urlInput {
+	width: 370px;
+}
+.titleForm input, .urlForm input {
+	width: 358px;
+	height: 38px;
+	margin: 0;
+	padding: 6px;
+	border: 0;
+	font: medium/1.2 Meiryo,"MS PGothic",Arial,Verdana,Sans-Serif;
+}
+
+.descForm, .taglistForm {
+	width: 100%;
+	border: solid 5px #ccc;
+}
+.descForm .descInput, .taglistForm .taglistInput {
+	width: 370px;
+}
+.descForm textarea, .taglistForm textarea {
+	width: 358px;
+	height: 98px;
+	margin: 0;
+	padding: 6px;
+	border: 0;
+	font: medium/1.2 Meiryo,"MS PGothic",Arial,Verdana,Sans-Serif;
+}
+
+.thumbArea {
+	margin: 10px auto;
+	width: 380px;
+	height: 125px;
+	background: rgba(0,0,0,0.1);
+	border: 4px dashed rgba(0,0,0,0.2);
+	display: -webkit-box;
+	-webkit-box-align: center;
+	-webkit-box-pack: center;
+}
+
+.submit_create, .submit_update, .submit_delete {
+	margin: 5px;
+	float: right; 
+	width:120px;
+	height:50px;
+	cursor:pointer;
+	font-size: 24px;
+	color: #ccc;
+	background: #eee;
+	display: -webkit-box;
+	-webkit-box-align: center;
+	-webkit-box-pack: center;
+}
+.submit_create.active, .submit_update.active, .submit_delete.active {
+	background: #ccc;
+	color: #fff;
+}
