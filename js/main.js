@@ -78,7 +78,7 @@ $(function(){
 
 /* tagTable */
 	$('.tagtableIcon').on('click',function(){
-//		alert('Under Constructing...');
+		$(this).toggleClass('tagtableOn');
 		var slider_bg = $('#slider_background');
 		var slider_ct = $('#slider_container');
 		if(slider_bg.hasClass('open')){

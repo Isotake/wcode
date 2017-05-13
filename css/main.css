@@ -276,10 +276,16 @@
 		align-items: center;
 		justify-content: center;
 		width: 100%;
-		height: 576px;
+		height: 420px;
+		margin: 156px 0 0 0;
+		padding: 0;
+		overflow: hidden;
+	}
+	#slider_container:hover {
 		margin: 0;
 		padding: 156px 0 0 0;
-		overflow: hidden;
+		height: 576px;
+		-background: rgba(255, 255, 255, 0.4);
 	}
 	#slider_container.open {
 		transform: scale(1, 1);
@@ -436,6 +442,7 @@
 		position: absolute;
 		top: 0;
 		left: 0;
+		z-index: 1;
 		width: 100%;
 		height: 100%;
 		text-indent: 200%;
@@ -458,7 +465,7 @@
 		display: block;
 		width: 24px;
 		height: 24px;
-		background-image: radial-gradient(rgba(216, 164, 109, 1) 30%, rgba(216, 164, 109, 0) 40%);
+		background-image: radial-gradient(rgba(216, 164, 109, 1) 30%, rgba(216, 164, 109, 0) 36%);
 		background-color: rgba(0, 0, 0, 0.2);
 		background-repeat: no-repeat;
 		border-radius: 50%;
@@ -639,7 +646,10 @@
 		.tags_tagarea.show .tagbox_wrapper {
 			display: block;
 		}
-
+		.tags_tagarea .pre-tag,
+		.tags_tagarea .pre-list {
+			display: none;
+		}
 		.tagbox_wrapper {
 			padding: 3px;
 			border: solid 1px #000;
