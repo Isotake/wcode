@@ -1,4 +1,17 @@
 <?php
+/* eg)
+define('APP_DOMAIN', 'backup.sample.com');
+define('APP_URL', APP_DOMAIN.'/wcode/');
+
+define('APP_DOMAIN', 'wcode.sample.com');
+define('APP_URL', APP_DOMAIN);
+*/
+define('APP_DOMAIN', 'app_domain');
+define('APP_URL', 'app_url');
+
+define('APP_V4ADDR', 'xxx.xxx.xxx.xxx');
+define('APP_V6ADDR', 'xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx');
+
 define('DB_USER', 'db_user');
 define('DB_PASS', 'db_pass');
 ?>

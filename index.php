@@ -1,24 +1,22 @@
 <?php
-$ua = $_SERVER['HTTP_USER_AGENT'];
-if(strpos($ua, 'AppleWebKit') === false){
-	header('Location: index_nosupport.php');
-	exit();
-}
-
-// v2.13 
-$request_uri = (isset($_SERVER['SCRIPT_URL'])) ? $_SERVER['SCRIPT_URL'] : '' ;
-$http_host = $_SERVER['HTTP_HOST'];
-if($request_uri == '/wcode/' || $request_uri == '/wcode/ja/'){
-	$link_en = 'http://'.$http_host.'/wcode/';
-	$link_ja = 'http://'.$http_host.'/wcode/ja/';
-} else {
-	$link_en = 'http://'.$http_host.'/wcode/';
-	$link_ja = 'http://'.$http_host.'/wcode/index.php?lang=ja';
-}
-
 require('./mainfile.php');
 require('./include/general_function.php');
 require('./class/app.class.php');
+
+$nw_info = array('ip' => null, 'protocol' => null, 'http2' => false);
+if(isset($_SERVER['HTTP2']) && $_SERVER['HTTP2'] == 'on'){
+	$nw_info['http2'] = true;
+}
+if($_SERVER['REQUEST_SCHEME'] == 'https'){
+	$nw_info['protocol'] = 'https';
+} elseif($_SERVER['REQUEST_SCHEME'] == 'http'){
+	$nw_info['protocol'] = 'http';
+}
+if($_SERVER['SERVER_ADDR'] == APP_V6ADDR){
+	$nw_info['ip'] = 'ipv6';
+} elseif($_SERVER['SERVER_ADDR'] == APP_V4ADDR) {
+	$nw_info['ip'] = 'ipv4';
+}
 
 $req_mode = 'read';
 $dbg = false;
@@ -107,9 +105,9 @@ $template->records = ($app->rst_data['records']) ? $app->rst_data['records'] : a
 $template->tagArray = $taglist;
 $template->count = $app->rst_data['count'];
 
+$template->nwinfo = $nw_info;
+
 $template->link_home = '//'.$_SERVER['HTTP_HOST'];
-$template->link_en = $link_en;
-$template->link_ja = $link_ja;
 $template->debug_output = (isset($debug_output)) ? $debug_output : '' ;
 $template->show('./templates/theme.html');
 

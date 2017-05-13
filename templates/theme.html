@@ -38,12 +38,16 @@
 		</a>
 	</div>
 	<div class="header-right">
+		<div class="nw_indicators">
+			<button class="nw_button ipv4<?php if($tpl->nwinfo['ip'] == 'ipv4'){ echo ' active'; } ?>">IPv4</button>
+			<button class="nw_button ipv6<?php if($tpl->nwinfo['ip'] == 'ipv6'){ echo ' active'; } ?>">IPv6</button>
+			<button class="nw_button http<?php if($tpl->nwinfo['protocol'] == 'http'){ echo ' active'; } ?>">HTTP</button>
+			<button class="nw_button https<?php if($tpl->nwinfo['protocol'] == 'https'){ echo ' active'; } ?>">HTTPS</button>
+			<button class="nw_button http2<?php if($tpl->nwinfo['http2']){ echo ' active'; } ?>">HTTP2</button>
+		</div>
 		<nav>
 			<a href="https://twitter.com/intent/tweet?text%3DScrapbook%20site%20for%20web%20design%20and%20developments&url=http%3A%2F%2Fwcode.takehaya.jp&via=bleubleut0214" target="_brank">
 				<button class="iconfont button-share icon-twitter"></button>
-			</a>
-			<a href="https://plusone.google.com/_/+1/confirm?hl=ja&url=http%3A%2F%2Ftakehaya.jp%2Fwcode%2F&title=takehaya-jp" target="_brank">
-				<button class="iconfont button-share icon-gplus"></button>
 			</a>
 			<a href="http://www.facebook.com/sharer.php?u=http%3A%2F%2Ftakehaya.jp%2Fwcode%2F" target="_brank">
 				<button class="iconfont button-share icon-facebook"></button>
