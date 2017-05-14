@@ -4,7 +4,7 @@ require('./include/general_function.php');
 require('./class/app.class.php');
 
 $req_mode = 'read';
-$dbg = false;
+$dbg = true;
 require('./class/database.class.php');
 $db = DatabaseFactory::getDatabaseConnection($req_mode, $dbg);
 

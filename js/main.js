@@ -31,6 +31,14 @@ $(function(){
 	});
 
 /* slider_container */
+	$('#slider figure.img_container').hover(
+		function(e){
+			$('#slider_container').addClass('hovering');
+		}
+	,	function(e){
+			$('#slider_container').removeClass('hovering');
+		}
+	);
 	$('#slider-controler li').on('click', function(){
 		$('#slider-controler li').removeClass('active');
 		$(this).addClass('active');

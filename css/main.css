@@ -276,20 +276,19 @@
 		align-items: center;
 		justify-content: center;
 		width: 100%;
-		height: 420px;
-		margin: 156px 0 0 0;
+		height: 442px;
+		margin: 148px 0 0 0;
 		padding: 0;
 		overflow: hidden;
-	}
-	#slider_container:hover {
-		margin: 0;
-		padding: 156px 0 0 0;
-		height: 576px;
-		-background: rgba(255, 255, 255, 0.4);
 	}
 	#slider_container.open {
 		transform: scale(1, 1);
 		transition: transform .3s ease-in 1.4s;
+	}
+	#slider_container.open.hovering {
+		margin: 0;
+		padding: 148px 0 0 0;
+		height: 590px;
 	}
 	#slider_container.close {
 		transform: scale(1, 0);
@@ -388,23 +387,26 @@
 		right: 1rem;
 		bottom: 1rem;
 		left: 1rem;
-		opacity: 0;
+		opacity: 1;
 		transition: opacity 0.35s, transform 0.35s;
 	}
 	#slider figure.img_container figcaption:before {
-		border-top: solid 1px #fff;
-		border-bottom: solid 1px #fff;
-		transform: scale(0, 1);
+		border-top: solid 1px #bcbcbc;
+		border-bottom: solid 1px #bcbcbc;
+		transform: scale(1, 1);
 	}
 	#slider figure.img_container figcaption:after {
-		border-right: solid 1px #fff;
-		border-left: solid 1px #fff;
-		transform: scale(1, 0);
+		border-right: solid 1px #bcbcbc;
+		border-left: solid 1px #bcbcbc;
+		transform: scale(1, 1);
 	}
-	#slider figure.img_container:hover figcaption:before,
+	#slider figure.img_container:hover figcaption:before {
+		transform: scale(0, 1);
+		opacity: 0;
+	}
 	#slider figure.img_container:hover figcaption:after {
-		opacity: 1;
-		transform: scale(1);
+		transform: scale(1, 0);
+		opacity: 0;
 	}
 	#slider figure.img_container h2 {
 		position: absolute;
@@ -425,16 +427,19 @@
 	#slider figure.img_container p {
 		position: absolute;
 		top: 50%;
-		left: 2rem;
-		line-height: 1;
+		right: 2rem;
 		opacity: 0;
+		padding-right: 0.5rem;
+		border-right: solid 0px #fff;
 		font-size: 0.8rem;
-		color: #bcbcbc;
-		transition: color 0.35s, opacity 0.35s ease-out 0.35s, transform 0.35s ease-out 0.35s;
-		transform: translate3d(200%, 0.5rem, 0);
+		line-height: 1;
+		color: #fff;
+		text-align: right;
+		transition: opacity 0.35s ease-out 0.35s, transform 0.35s ease-out 0.35s, border 0.2s ease-out 0.7s;
+		transform: translate3d(-200%, 0.5rem, 0);
 	}
 	#slider figure.img_container:hover p {
-		color: #fff;
+		border-right-width: 2px;
 		opacity: 1;
 		transform: translate3d(0, 0.5rem, 0);
 	}
