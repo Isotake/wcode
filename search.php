@@ -52,8 +52,8 @@ switch($_mode){
 		break;
 }
 $app->makeResultData();
-$app->rst_data['dbg'] = null;
-//$app->rst_data['dbg'] = $app->app_data;
+//$app->rst_data['dbg'] = null;
+$app->rst_data['dbg'] = $app->app_data;
 
 if($_mode == 'taglist'){
 //	echo implode('\n', $app->rst_data['tags']); << NG

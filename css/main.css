@@ -62,23 +62,15 @@
 		display: flex;
 		justify-content: center;
 	}
-	header .button-share {
-		margin: 0px 12px;
-		padding: 2px 0 0 0;
-		width: 60px;
-		height: 60px;
-		outline: none;
-		border: 0;
-		border-radius: 50%;
-		font-size: 28px;
-		cursor: pointer;
-		transition: color .2s ease-out;
-	}
 	.header-left{
 		width: 500px;
-		display: flex;
-		align-items: center;
-		justify-content: flex-start;
+	}
+	.header-left .site-subtitle {
+		padding-bottom: 10px;
+		font-size: 0.9rem;
+		color: #fff;
+	}
+	.header-left .sitelogo {
 	}
 	.header-right{
 		width: 500px;
@@ -99,6 +91,7 @@
 		border: 0;
 		padding: 2px 6px;
 		border-radius: 3px;
+		font-size: 0.8rem;
 	}
 	header .nw_button.ipv4.active {
 	}
@@ -109,6 +102,18 @@
 	header .nw_button.https.active {
 	}
 	header .nw_button.http2.active {
+	}
+	header .button-share {
+		margin: 0px 12px;
+		padding: 2px 0 0 0;
+		width: 60px;
+		height: 60px;
+		outline: none;
+		border: 0;
+		border-radius: 50%;
+		font-size: 28px;
+		cursor: pointer;
+		transition: color .2s ease-out;
 	}
 
 /* footer */
