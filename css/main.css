@@ -299,7 +299,7 @@
 		width: 360px;
 		height: 360px;
 		background: #222;
-		box-shadow: inset 0 1px 7px rgba(0, 0, 0, 1);
+		box-shadow: inset 0 1px 1px rgba(0, 0, 0, 1);
 		border-radius: 3px;
 	}
 	#slider .inner {
@@ -379,69 +379,41 @@
 		width: 280px;
 		height: 174px;
 	}
-	#slider figure.img_container figcaption:before,
-	#slider figure.img_container figcaption:after {
-		content: '';
-		position: absolute;
-		top: 1rem;
-		right: 1rem;
-		bottom: 1rem;
-		left: 1rem;
-		opacity: 1;
-		transition: opacity 0.35s, transform 0.35s;
-	}
-	#slider figure.img_container figcaption:before {
-		border-top: solid 1px #bcbcbc;
-		border-bottom: solid 1px #bcbcbc;
-		transform: scale(1, 1);
-	}
-	#slider figure.img_container figcaption:after {
-		border-right: solid 1px #bcbcbc;
-		border-left: solid 1px #bcbcbc;
-		transform: scale(1, 1);
-	}
-	#slider figure.img_container:hover figcaption:before {
-		transform: scale(0, 1);
-		opacity: 0;
-	}
-	#slider figure.img_container:hover figcaption:after {
-		transform: scale(1, 0);
-		opacity: 0;
+	#slider figure.img_container h2,
+	#slider figure.img_container p {
+		width: 50%;
+		height: 50%;
+		margin: 0;
+		padding: 0.4rem 0.5rem;
+		color: rgba(255, 255, 255, 0.6);
+		border: solid 2px rgba(255, 255, 255, 0.6);
+		box-sizing: border-box;
 	}
 	#slider figure.img_container h2 {
-		position: absolute;
-		top: 50%;
-		left: 2rem;
-		margin: 0;
-		padding: 0;
-		font-size: 1.2rem;
-		letter-spacing: -0.1px;
-		color: #bcbcbc;
+		font-size: 1rem;
+		text-align: left;
+		transform: translate3d(25px, 25px, 0);
 		transition: transform 0.35s;
-		transform: translate3d(0, -1rem, 0);
 	}
 	#slider figure.img_container:hover h2 {
-		color: #fff;
-		transform: translate3d(0, -2rem, 0);
+		transform: translate3d(15px, 15px, 0);
 	}
 	#slider figure.img_container p {
-		position: absolute;
-		top: 50%;
-		right: 2rem;
+		float: right;
+		display: flex;
+		align-items: flex-end;
+		justify-content: flex-end;
 		opacity: 0;
-		padding-right: 0.5rem;
-		border-right: solid 0px #fff;
-		font-size: 0.8rem;
+		font-size: smaller;
+		font-weight: bold;
 		line-height: 1;
-		color: #fff;
 		text-align: right;
-		transition: opacity 0.35s ease-out 0.35s, transform 0.35s ease-out 0.35s, border 0.2s ease-out 0.7s;
-		transform: translate3d(-200%, 0.5rem, 0);
+		transform: translate3d(-50%, -50%, 0);
+		transition: opacity 0.35s, transform 0.35s;
 	}
 	#slider figure.img_container:hover p {
-		border-right-width: 2px;
 		opacity: 1;
-		transform: translate3d(0, 0.5rem, 0);
+		transform: translate3d(-15px, -15px, 0);
 	}
 	#slider figure.img_container a {
 		position: absolute;
@@ -461,10 +433,10 @@
 		margin: 0;
 		padding: 0;
 		width: 100%;
-		height: 60px;
+		height: 40px;
 	}
 	#slider-controler li {
-		margin: 10px 3px 0;
+		margin: 0 4px;
 	}
 	#slider-controler li {
 		display: block;
