@@ -47,12 +47,9 @@
 		height: 101%;
 		background-color: rgba(0,0,0,.8);
 		z-index: 10;
-		display: -webkit-box;
-		-webkit-box-pack: center;
-		-webkit-box-align: center;
-		display: box;
-		box-pack: center;
-		box-align: center;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 
 /* headerContainer */
@@ -512,8 +509,7 @@
 	#contentsContainer {
 		position: relative;
 		width: 100%;
-		display: -webkit-box;
-		display: box;
+		display: flex;
 	}
 	#leftContainer {
 		width: 230px;
@@ -531,17 +527,14 @@
 	}
 	.searchIcon, .statusIcon, .srtcutIcon, .tagtableIcon, .configIcon, .adsIcon {
 		float: left;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 		margin: 3px;
 		width: 64px;
 		height: 64px;
 		background: #ddd;
 		font-size: 28px;
-		display: -webkit-box;
-		-webkit-box-align: center;
-		-webkit-box-pack: center;
-		display: box;
-		box-pack: center;
-		box-align: center;
 		transition-duration: 0.2s;
 	}
 	.searchIcon:hover, .statusIcon:hover, .srtcutIcon:hover, .tagtableIcon:hover, .configIcon:hover, .adsIcon:hover {
@@ -786,28 +779,22 @@
 		padding: 10px 0 0 15px;
 	}
 	.coverBlockIcons {
+		display: flex;
+		align-items: center;
+		justify-content: center;
 		width: 100%;
 		height: 70%;
-		display: -webkit-box;
-		-webkit-box-align: center;
-		-webkit-box-pack: center;
-		display: box;
-		box-pack: center;
-		box-align: center;
 	}
 	.coverBlockZoom, .coverBlockLink {
+		display: flex;
+		align-items: center;
+		justify-content: center;
 		width: 44px;
 		height: 44px;
 		margin: 10px;
 		border-radius: 22px;
 		font-size: 24px;
 		background: #ddd;
-		display: -webkit-box;
-		-webkit-box-align: center;
-		-webkit-box-pack: center;
-		display: box;
-		box-pack: center;
-		box-align: center;
 	}
 
 /* largeBlock*/
@@ -864,15 +851,12 @@
 		border-bottom: solid 14px transparent;
 	}
 	.largeBlockImage {
-		clear: both;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 		height: 710px;
 		overflow: hidden;
-		display: -webkit-box;
-		-webkit-box-align: center;
-		-webkit-box-pack: center;
-		display: box;
-		box-pack: center;
-		box-align: center;
+		clear: both;
 	}
 
 /* configBlock */
@@ -892,18 +876,15 @@
 		overflow: hidden;
 	}
 	.itemConfigExec {
-		cursor: pointer;
 		float: left;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 		margin-top: 5px;
 		padding: 5px;
 		width: 100%;
 		border: 0;
-		display: -webkit-box;
-		-webkit-box-align: center;
-		-webkit-box-pack: center;
-		display: box;
-		box-pack: center;
-		box-align: center;
+		cursor: pointer;
 		transition-duration: 0.2s;
 	}
 	.itemConfigMaxrowsSelected {
@@ -928,17 +909,14 @@
 		overflow: hidden;
 	}
 	.itemSrtcutExec {
-		cursor: pointer;
 		float: left;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 		padding: 5px;
 		width: 100%;
 		border: 0;
-		display: -webkit-box;
-		-webkit-box-align: center;
-		-webkit-box-pack: center;
-		display: box;
-		box-pack: center;
-		box-align: center;
+		cursor: pointer;
 		transition-duration: 0.2s;
 	}
 
@@ -960,15 +938,12 @@
 	}
 	.itemGlobeExec {
 		float: left;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 		padding: 5px;
 		width: 100%;
 		border: solid 1px #ccc;
-		display: -webkit-box;
-		-webkit-box-align: center;
-		-webkit-box-pack: center;
-		display: box;
-		box-pack: center;
-		box-align: center;
 	}
 
 /* itemCountArea */
