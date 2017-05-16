@@ -781,7 +781,7 @@ $(function(){
 			_html+= '<div class="coverBlockTitle">' + data.title + '</div>';
 			_html+= '<div class="coverBlockIcons">';
 			_html+= '<a href="' + data.url + '" target="_brank">' + '<div class="coverBlockLink"><i class="icon-link-ext"></i></div></a>';
-			_html+= '<div class="coverBlockZoom"><i class="icon-zoom-in"></i></div>';
+/*			_html+= '<div class="coverBlockZoom"><i class="icon-zoom-in"></i></div>'; */
 			_html+= '</div>';
 			_html+= '</div>';
 			_html+= '';
