@@ -40,6 +40,7 @@ switch($_mode){
 	case 'prevto':
 	case 'nextto':
 		$app->makeRecordArray();
+		$app->makeListCount();
 		break;
 	case 'count':
 		$app->makeListCount();
@@ -53,7 +54,7 @@ switch($_mode){
 }
 $app->makeResultData();
 $app->rst_data['dbg'] = null;
-//$app->rst_data['dbg'] = $app->app_data;
+//$app->rst_data['dbg'] = $app->rst_data;
 
 if($_mode == 'taglist'){
 //	echo implode('\n', $app->rst_data['tags']); << NG

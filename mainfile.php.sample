@@ -8,6 +8,7 @@ define('APP_URL', APP_DOMAIN);
 */
 define('APP_DOMAIN', 'app_domain');
 define('APP_URL', 'app_url');
+define('APP_FULLURL', 'https://'.APP_URL);
 
 define('APP_V4ADDR', 'xxx.xxx.xxx.xxx');
 define('APP_V6ADDR', 'xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx');

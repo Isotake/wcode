@@ -344,14 +344,17 @@ $photoid_arrは配列か？
 			$this->rst_data['item_num_from'] = $this->req_data['offset'];
 			$this->rst_data['item_num'] = $this->app_data['maxrow'] + $this->app_data['item_num'];
 			$this->rst_data['item_num_to'] = $this->req_data['offset'] + $this->app_data['maxrow'] + $this->app_data['item_num'];
-		} elseif($this->rst_data['searchMode'] == 'init'){
+		} elseif($this->rst_data['searchMode'] == 'init' || $this->rst_data['searchMode'] == 'search'){
 			$this->rst_data['item_num_from'] = $this->app_data['offset'];
-			$this->rst_data['item_num'] = $this->app_data['item_num'];
-			$this->rst_data['item_num_to'] = $this->app_data['offset'] + $this->app_data['item_num'];
+			$this->rst_data['item_num'] = $this->app_data['maxrow'];
+			$this->rst_data['item_num_to'] = $this->app_data['offset'] + $this->app_data['maxrow'];
 		} else {
 			$this->rst_data['item_num_from'] = $this->app_data['offset'];
 			$this->rst_data['item_num'] = $this->app_data['maxrow'] + $this->app_data['item_num'];
 			$this->rst_data['item_num_to'] = $this->app_data['offset'] + $this->app_data['maxrow'] + $this->app_data['item_num'];
+		}
+		if($this->rst_data['item_num_to'] > $this->rst_data['count']){
+			$this->rst_data['item_num_to'] = $this->rst_data['count'];
 		}
 		$this->rst_data['maxrow'] = $this->app_data['maxrow'];
 
